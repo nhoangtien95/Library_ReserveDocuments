@@ -1,0 +1,1236 @@
+﻿@model ThuVien.ViewModels.Step2Model
+@{
+    ViewBag.Title = "Dự trữ tài liệu";
+    var sId = ViewBag.sId;
+    var tId = ViewBag.tId;
+}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="~/Scripts/MicrosoftAjax.js"></script>
+<script src="~/Scripts/MicrosoftMvcAjax.js"></script>
+<script src="~/Scripts/MicrosoftMvcValidation.js"></script>
+<script src="~/Scripts/MvcFoolproofValidation.js"></script>
+
+
+
+
+<script>
+    function SelectType() {
+        var Type = $('.selectionType').val();
+        switch (Type) {
+            case "0": {
+                $('#other').css("display", "none");
+                $('#paper').css("display", "none");
+                $('#book').show();
+                break;
+            }
+            case "1": {
+                $('#other').css("display", "none");
+                $('#book').css("display", "none");
+                $('#paper').show();
+                break;
+            }
+            default:
+                {
+                    $('#book').css("display", "none");
+                    $('#paper').css("display", "none");
+                    $('#other').show();
+                }
+        }
+    }
+
+    function SelectSource(sel) {
+        var Source = sel.value;
+        switch (Source) {
+            case "0": {
+                $('.normal').css("display", "none");
+                $('.instructer').css("display", "none");
+                $('.library').show();
+                break;
+            }
+            case "1": {
+                $('.normal').css("display", "none");
+                $('.library').css("display", "none");
+                $('.instructer').show();
+                break;
+            }
+            default:
+                {
+                    $('.library').css("display", "none");
+                    $('.instructer').css("display", "none");
+                    $('.normal').show();
+                }
+        }
+    }
+
+    function SelectReserve(sel) {
+        var Source = sel.value;
+        switch (Source) {
+            case "0": {
+                $('.quantity').show();
+                break;
+            }
+            case "1": {
+                $('.quantity').css("display", "none");
+                $.validator.setDefaults({
+                    ignore: ".quantity"
+                });
+                break;
+            }
+            default:
+                {
+                    $('.quantity').show();
+                }
+        }
+    }
+
+    $(function () {
+
+        $('.refresh').click(function () {
+            $(':input', '.InputForm')
+      .not(':button, :submit, :reset, :hidden')
+      .val('')
+      .removeAttr('selected');
+        });
+
+    });
+
+    $(function () {
+
+        $(document).ready(function () {
+            var sId = '@(sId)';
+            var tId = '@(tId)';
+            if (tId !== null) {
+
+                if (tId == "0") {
+                    $('.selectionType').val("0")
+                    switch (sId) {
+                        case "0": {
+                            $('#other').css("display", "none");
+                            $('#paper').css("display", "none");
+                            $('#book').show();
+                            $('.normal').css("display", "none");
+                            $('.instructer').css("display", "none");
+                            $('.library').show();
+                            break;
+                        }
+                        case "1": {
+                            $('#other').css("display", "none");
+                            $('#paper').css("display", "none");
+                            $('#book').show();
+                            $('.normal').css("display", "none");
+                            $('.library').css("display", "none");
+                            $('.instructer').show();
+                            break;
+                        }
+                        default:
+                            {
+                                $('#other').css("display", "none");
+                                $('#paper').css("display", "none");
+                                $('#book').show();
+                                $('.instructer').css("display", "none");
+                                $('.library').css("display", "none");
+                                $('.normal').show();
+                            }
+                    }
+                } else if (tId == "1") {
+
+                    $('.selectionType').val("1")
+                    switch (sId) {
+                        case "0": {
+                            $('#other').css("display", "none");
+                            $('#book').css("display", "none");
+                            $('#paper').show();
+                            $('.normal').css("display", "none");
+                            $('.instructer').css("display", "none");
+                            $('.library').show();
+                            break;
+                        }
+                        case "1": {
+                            $('#other').css("display", "none");
+                            $('#book').css("display", "none");
+                            $('#paper').show();
+                            $('.normal').css("display", "none");
+                            $('.library').css("display", "none");
+                            $('.instructer').show();
+                            break;
+                        }
+                        default:
+                            {
+                                $('#other').css("display", "none");
+                                $('#book').css("display", "none");
+                                $('#paper').show();
+                                $('.instructer').css("display", "none");
+                                $('.library').css("display", "none");
+                                $('.normal').show();
+                            }
+                    }
+                } else {
+
+                    $('.selectionType').val("2")
+                    switch (sId) {
+                        case "0": {
+                            $('#paper').css("display", "none");
+                            $('#book').css("display", "none");
+                            $('#other').show();
+                            $('.normal').css("display", "none");
+                            $('.instructer').css("display", "none");
+                            $('.library').show();
+                            break;
+                        }
+                        case "1": {
+                            $('#paper').css("display", "none");
+                            $('#book').css("display", "none");
+                            $('#other').show();
+                            $('.normal').css("display", "none");
+                            $('.library').css("display", "none");
+                            $('.instructer').show();
+                            break;
+                        }
+                        default:
+                            {
+                                $('#paper').css("display", "none");
+                                $('#book').css("display", "none");
+                                $('#other').show();
+                                $('.instructer').css("display", "none");
+                                $('.library').css("display", "none");
+                                $('.normal').show();
+                            }
+                    }
+                }
+            }
+        });
+
+    });
+    
+
+
+   
+
+</script>
+
+
+
+
+
+@*@Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.Type, "--Vui lòng chọn--", new { @class = "selectionType", onchange = "SelectType()" })*@
+@Html.DropDownListFor(x => x.Nguon, new SelectList(Model.TypeOptions, "TypeId", "Value"), "--Vui lòng chọn--", new { @class = "selectionType", onchange = "SelectType()" })
+
+<div id="book" style="display:none">
+    <h2>Sách</h2>
+    <div class="col-md-2">
+        @Html.DisplayNameFor(x => x.TL_Sach.Nguon)
+    </div>
+
+    <div class="col-md-4">
+        @Html.DropDownListFor(x => x.TL_Sach.Nguon, new SelectList(Model.SourceOptions, "SourceId", "Value"), "--Vui lòng chọn--", new { @class = "selectionSource", onchange = "SelectSource(this)" })
+    </div>
+    <br /><br />
+    <div class="library" style="display:none">
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <input type="hidden" name="tId" value="0" />
+                    <input type="hidden" name="sId" value="0" />
+                    @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "0", style = "display: none;" })
+                    @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
+                    @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_Sach.TraCuu)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.TL_Sach.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.TL_Sach.TraCuu, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                    <br />
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.DangDuTru)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+
+                    <div class="quantity">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(x => x.SoLuong)
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.SoLuong)
+                        </div>
+
+                        @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+                                                
+                        <br />
+                        <br />
+                    </div>
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_Sach.MucDich)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.TL_Sach.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.TL_Sach.MucDich, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.TL_Sach.YKien)
+                    </div>
+
+                    <br />
+                    <br />
+                </div>
+
+                <input type="submit" value="Hoàn tất" />
+                <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+    </div>
+
+    <div class="normal" style="display:none">
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <input type="hidden" name="tId" value="0" />
+            <input type="hidden" name="sId" value="2" />
+            @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "2", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "2", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq" })
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.NXB)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.NXB)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.DangDuTru)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                </div>
+
+                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="quantity">
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.SoLuong)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.SoLuong)
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_Sach.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.MucDich, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.YKien)
+                </div>
+
+                <br />
+                <br />
+            </div>
+
+            <input type="submit" value="Hoàn tất" />
+            <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+    </div>
+
+    <div class="instructer" style="display:none">
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="tId" value="0" />
+            <input type="hidden" name="sId" value="1" />
+            @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "1", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "1", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq"})
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.NXB)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.NXB)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.DangDuTru)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                </div>
+
+                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="quantity">
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.SoLuong)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.SoLuong)
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_Sach.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Sach.MucDich, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Sach.YKien)
+                </div>
+
+                <br />
+                <br />
+            </div>
+
+            <input type="submit" value="Hoàn tất" />
+            <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+<div id="paper" style="display:none">
+<h2>Bài Báo</h2>
+    <div class="col-md-2">
+        @Html.DisplayNameFor(x => x.TL_BaiBao.Nguon)
+    </div>
+
+    <div class="col-md-4">
+        @Html.DropDownListFor(x => x.TL_BaiBao.Nguon, new SelectList(Model.SourceOptions, "SourceId", "Value"), "--Vui lòng chọn--", new { @class = "selectionSource", onchange = "SelectSource(this)" })
+    </div>
+
+    <div class="row">
+       
+
+
+<div class="library" style="display:none">
+    @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+    {
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="tId" value="1" />
+        <input type="hidden" name="sId" value="0" />
+        @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "0", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Loai, new { @Value = "1", style = "display: none;" })
+
+        <br />
+        <br />
+
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_BaiBao.TraCuu)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+            </div>
+
+                <br />
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.ChiTiet, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.DangDuTru)
+                </div>
+
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="quantity">
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.SoLuong)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.SoLuong)
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_BaiBao.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.MucDich, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <br />
+                <br />
+
+                <input type="submit" value="Hoàn tất" />
+                <input type="button" value="Nhập Lại" class="refresh" />
+
+    }
+
+
+
+</div>
+
+
+        <div class="normal" style="display:none">
+            @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+            {
+                <input type="hidden" name="tId" value="1" />
+                <input type="hidden" name="sId" value="2" />
+
+                @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "2", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Nguon, new { @Value = "2", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Loai, new { @Value = "1", style = "display: none;" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+
+
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TenBai)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TenBai)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TenBai, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TacGia, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TenTapChi)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TenTapChi)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TenTapChi, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.PhatHanh)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.PhatHanh)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.PhatHanh, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.ChiTiet, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.DangDuTru)
+                </div>
+
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="quantity">
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.SoLuong)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.SoLuong)
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_BaiBao.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.MucDich, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <br />
+                <br />
+
+
+                <input type="submit" value="Hoàn tất" />
+                <input type="button" value="Nhập Lại" class="refresh" />
+            }
+        </div>
+
+        <div class="instructer" style="display:none">
+            @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+            {
+                <input type="hidden" name="tId" value="1" />
+                <input type="hidden" name="sId" value="1" />
+
+                @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "1", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Nguon, new { @Value = "1", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Loai, new { @Value = "1", style = "display: none;" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+
+
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TenBai)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TenBai)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TenBai, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TacGia, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TenTapChi)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TenTapChi)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.TenTapChi, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.PhatHanh)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.PhatHanh)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.PhatHanh, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_BaiBao.ChiTiet, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.DangDuTru)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                </div>
+
+                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+
+                    <div class="quantity">
+                        <div class="col-md-2">
+                            @Html.DisplayNameFor(x => x.SoLuong)
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.SoLuong)
+                        </div>
+
+
+                        @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                        <br />
+                        <br />
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_BaiBao.MucDich)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.TL_BaiBao.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.TL_BaiBao.MucDich, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_BaiBao.YKien)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.TL_BaiBao.YKien)
+                    </div>
+
+                    <br />
+                    <br />
+
+
+                    <input type="submit" value="Hoàn tất" />
+                    <input type="button" value="Nhập Lại" class="refresh" />
+            }
+        </div>
+
+
+
+        </div>
+    </div>
+
+
+
+<div id="other" style="display:none">
+    <h2>Khác</h2>
+    <div class="col-md-2">
+        @Html.DisplayNameFor(x => x.TL_Khac.Nguon)
+    </div>
+
+    <div class="col-md-4">
+        @Html.DropDownListFor(x => x.TL_Khac.Nguon, new SelectList(Model.SourceOptions, "SourceId", "Value"), "--Vui lòng chọn--", new { @class = "selectionSource", onchange = "SelectSource(this)" })
+    </div>
+    <div class="normal" style="display:none">
+       
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="tId" value="2" />
+            <input type="hidden" name="sId" value="2" />
+            @Html.TextBoxFor(x => x.TL_Khac.Nguon, new { @Value = "2", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "2", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "2", style = "display: none;" })
+
+            <div class="row">
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.NhanDe)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.NhanDe)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.NhanDe, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.TacGia, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_Khac.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.MucDich, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <br />
+                <br />
+
+            </div>
+
+            <input type="submit" value="Hoàn tất" />
+            <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+
+    </div>
+
+
+    <div class="instructer" style="display:none">
+
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="tId" value="2" />
+            <input type="hidden" name="sId" value="1" />
+            @Html.TextBoxFor(x => x.TL_Khac.Nguon, new { @Value = "1", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "1", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "2", style = "display: none;" })
+
+            <div class="row">
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.NhanDe)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.NhanDe)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.NhanDe, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.TacGia)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.TacGia)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.TacGia, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_Khac.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.MucDich, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <br />
+                <br />
+
+            </div>
+
+            <input type="submit" value="Hoàn tất" />
+            <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+
+    </div>
+
+
+
+    <div class="library" style="display:none">
+
+        @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+        {
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="tId" value="2" />
+            <input type="hidden" name="sId" value="0" />
+            @Html.TextBoxFor(x => x.TL_Khac.Nguon, new { @Value = "0", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "2", style = "display: none;" })
+
+            <div class="row">
+                <br />
+                <br />
+
+
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(x => x.TL_Khac.TraCuu)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.TL_Khac.TraCuu) <p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+                    </div>
+
+                    @Html.ValidationMessageFor(x => x.TL_Khac.TraCuu, "", new { @class = "text-danger" })
+                    <br />
+                    <br />
+                <br />
+
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.MucDich)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.TL_Khac.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.TL_Khac.MucDich, "", new { @class = "text-danger" })
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.YKien)
+                </div>
+
+                <br />
+                <br />
+
+            </div>
+
+            <input type="submit" value="Hoàn tất" />
+            <input type="button" value="Nhập Lại" class="refresh" />
+
+        }
+
+
+    </div>
+
+</div>
