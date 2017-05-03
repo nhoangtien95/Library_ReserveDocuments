@@ -45,7 +45,7 @@ namespace ThuVien.Controllers
 
         public ActionResult Step2()
         {
-            // if (Session["user"] == null) return RedirectToAction("Index");
+            if (Session["user"] == null) return RedirectToAction("Index");
 
             Step2Model model = new Step2Model();
             ViewBag.sId = null;
@@ -56,10 +56,10 @@ namespace ThuVien.Controllers
         [HttpPost]
         public ActionResult Step2(Step2Model step2, int sId, int tId)
         {
+            Step1Model step1 = new Step1Model();
             var a = Session["user"];
             if (ModelState.IsValid)
             {
-                
                 return RedirectToAction("Index");
             }
             ViewBag.sId = sId;

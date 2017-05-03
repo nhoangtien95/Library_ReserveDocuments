@@ -17,7 +17,8 @@ namespace ThuVien.Models
             }
         }
         public int ID { get; set; }
-       
+
+        public string Loai { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không bỏ trống Nguồn cung cấp. ")]
         [Display(Name = "Nguồn cung cấp")]

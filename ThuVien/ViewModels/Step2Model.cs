@@ -95,8 +95,11 @@ namespace ThuVien.ViewModels
         [RegularExpression("^[0-9]*$", ErrorMessage = "Xin vui lòng nhập số. ")]
         public string SoLuong { get; set; }
 
-       
-        
+        [Required(ErrorMessage = "Vui lòng không bỏ trống Mục đích sử dụng. ")]
+        [Display(Name = "Mục đích sử dụng")]
+        public string MucDich { get; set; }
+
+
         public TL_Sach TL_Sach { get; set; }
         public TL_BaiBao TL_BaiBao { get; set; }
         public TL_Khac TL_Khac { get; set; }
