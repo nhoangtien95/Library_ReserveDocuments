@@ -188,6 +188,14 @@
     <Compile Include="Migrations\201705041425438_update_models.Designer.cs">
       <DependentUpon>201705041425438_update_models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705041652509_updateRela.cs" />
+    <Compile Include="Migrations\201705041652509_updateRela.Designer.cs">
+      <DependentUpon>201705041652509_updateRela.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041807085_imtired.cs" />
+    <Compile Include="Migrations\201705041807085_imtired.Designer.cs">
+      <DependentUpon>201705041807085_imtired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\DataRepository.cs" />
     <Compile Include="DAL\DB.cs" />
     <Compile Include="Interfaces\IData.cs" />
@@ -315,6 +323,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705041425438_update_models.resx">
       <DependentUpon>201705041425438_update_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041652509_updateRela.resx">
+      <DependentUpon>201705041652509_updateRela.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041807085_imtired.resx">
+      <DependentUpon>201705041807085_imtired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

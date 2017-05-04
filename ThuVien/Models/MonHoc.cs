@@ -12,7 +12,6 @@ namespace ThuVien.Models
         public int ID { get; set; }
 
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Mã môn học")]
         public string CourseID { get; set; }
 
@@ -28,7 +27,6 @@ namespace ThuVien.Models
 
         [Required]
         [Display(Name = "Mã nhóm lớp")]
-        [Range(0, 5)]
         public string Nhom { get; set; }
 
         [Required]

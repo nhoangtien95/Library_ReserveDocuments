@@ -1,6 +1,7 @@
 ﻿using Foolproof;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,7 @@ namespace ThuVien.ViewModels
         public class Type
         {
             public int TypeId { get; set; }
-            public string Value { get; set; }        
+            public string Value { get; set; }
         }
 
         public IEnumerable<Type> TypeOptions = new List<Type>
@@ -22,7 +23,7 @@ namespace ThuVien.ViewModels
             new Type {TypeId = 1, Value = "Bài Báo" },
             new Type {TypeId = 2, Value = "Khác" }
         };
-    
+
         public class Source
         {
             public int SourceId { get; set; }
@@ -61,8 +62,6 @@ namespace ThuVien.ViewModels
             new Purpose {PurposeId = 2, Value = "Tham khảo khác"}
         };
 
-
-
         [Required(ErrorMessage = "Vui lòng không bỏ trống Nguồn cung cấp. ")]
         [Display(Name = "Nguồn cung cấp")]
         public string Nguon { get; set; }
@@ -76,7 +75,6 @@ namespace ThuVien.ViewModels
                 return Loai == "2";
             }
         }
-
 
         [RequiredIf("checkSource", false, ErrorMessage = "Vui lòng không bỏ trống Dạng dự trữ.")]
         [Display(Name = "Dạng dự trữ")]
@@ -99,11 +97,15 @@ namespace ThuVien.ViewModels
         [Display(Name = "Mục đích sử dụng")]
         public string MucDich { get; set; }
 
+        public Step2Model()
+        {
+            TL_Sach = new TL_Sach();
+            TL_BaiBao = new TL_BaiBao();
+            TL_Khac = new TL_Khac();
+        }
 
         public TL_Sach TL_Sach { get; set; }
         public TL_BaiBao TL_BaiBao { get; set; }
         public TL_Khac TL_Khac { get; set; }
-
-
     }
 }

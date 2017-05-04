@@ -76,3 +76,5 @@ E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateID
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.modifyIDnullable.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_STTinHK.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_models.resources
+E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateRela.resources
+E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.imtired.resources

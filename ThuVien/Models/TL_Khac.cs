@@ -16,6 +16,7 @@ namespace ThuVien.Models
                 return Nguon == "0";
             }
         }
+
         public int ID { get; set; }
         public string Loai { get; set; }
 
@@ -38,12 +39,10 @@ namespace ThuVien.Models
         //[Required(ErrorMessage = "Vui lòng không bỏ trống Mục đích sử dụng. ")]
         [Display(Name = "Mục đích sử dụng")]
         public string MucDich { get; set; }
-        
+
         [Display(Name = "Ý kiến")]
         public string YKien { get; set; }
 
-        public virtual TaiLieu TaiLieu { get; set; }
-
-        
+        //public virtual TaiLieu TaiLieu { get; set; }
     }
 }
