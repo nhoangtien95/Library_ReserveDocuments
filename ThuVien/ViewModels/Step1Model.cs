@@ -46,9 +46,7 @@ namespace ThuVien.ViewModels
         public string Nganh { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không bỏ trống. ")]
-        [Display(Name = "Mã nhóm lớp")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Xin vui lòng nhập số cho nhóm. ")]
-        [Range(0, 5, ErrorMessage = "Số nhớm từ 0 - 5.")]
+        [Display(Name = "Mã lớp")]
         public string Nhom { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không bỏ trống. ")]
@@ -58,11 +56,13 @@ namespace ThuVien.ViewModels
 
         [Required(ErrorMessage = "Vui lòng không bỏ trống. ")]
         [DataType(DataType.Date)]
+        [Display(Name = "Dự trữ từ:")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime DuTruFrom { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không bỏ trống. ")]
         [DataType(DataType.Date)]
+        [Display(Name = "Dự trữ đến:")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime DuTruTo { get; set; }
 

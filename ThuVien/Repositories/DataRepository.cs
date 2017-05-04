@@ -118,6 +118,20 @@ namespace ThuVien.DAL
                                     document.DangDuTru = "Dự trữ dạng điện tử";
                                     document.SoLuong = null;
                                 }
+                                
+                            db.TL_Sach.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                BookId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
 
                             break;
                         }
@@ -146,6 +160,20 @@ namespace ThuVien.DAL
                                 document.DangDuTru = "Dự trữ dạng điện tử";
                                 document.SoLuong = null;
                             }
+
+                            db.TL_Sach.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                BookId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                     default:
@@ -173,6 +201,20 @@ namespace ThuVien.DAL
                                 document.DangDuTru = "Dự trữ dạng điện tử";
                                 document.SoLuong = null;
                             }
+
+                            db.TL_Sach.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                BookId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                 }
@@ -202,6 +244,20 @@ namespace ThuVien.DAL
                                 document.DangDuTru = "Dự trữ dạng điện tử";
                                 document.SoLuong = null;
                             }
+
+                            db.TL_BaiBao.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                PaperId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                     case 1:
@@ -229,6 +285,20 @@ namespace ThuVien.DAL
                                 document.DangDuTru = "Dự trữ dạng điện tử";
                                 document.SoLuong = null;
                             }
+
+                            db.TL_BaiBao.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                PaperId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                     default:
@@ -256,6 +326,20 @@ namespace ThuVien.DAL
                                 document.DangDuTru = "Dự trữ dạng điện tử";
                                 document.SoLuong = null;
                             }
+
+                            db.TL_BaiBao.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                PaperId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                 }
@@ -274,6 +358,20 @@ namespace ThuVien.DAL
                                 MucDich = ReserveType,
                                 YKien = step2.TL_BaiBao.YKien
                             };
+
+                            db.TL_Khac.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                OtherId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                     case 1:
@@ -287,6 +385,20 @@ namespace ThuVien.DAL
                                 MucDich = ReserveType,
                                 YKien = step2.TL_BaiBao.YKien
                             };
+
+                            db.TL_Khac.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                OtherId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                     default:
@@ -300,12 +412,26 @@ namespace ThuVien.DAL
                                 MucDich = ReserveType,
                                 YKien = step2.TL_BaiBao.YKien
                             };
+
+                            db.TL_Khac.Add(document);
+
+                            var gv = new GiangVien()
+                            {
+                                HoTen = step1.HoTen,
+                                DienThoai = step1.DienThoai,
+                                Khoa = step1.Khoa,
+                                SoThe = step1.SoThe,
+                                MonHocId = MonHoc.ID,
+                                OtherId = document.ID
+                            };
+
+                            db.GiangVien.Add(gv);
                             break;
                         }
                 }
-            }
+            }     
 
-           
+            db.SaveChanges();
         }
     }
 }

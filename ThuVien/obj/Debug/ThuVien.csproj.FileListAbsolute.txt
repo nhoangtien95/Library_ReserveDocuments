@@ -75,3 +75,4 @@ E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.addTable
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateID_GV_MH.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.modifyIDnullable.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_STTinHK.resources
+E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_models.resources

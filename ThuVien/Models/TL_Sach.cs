@@ -56,7 +56,7 @@ namespace ThuVien.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Xin vui lòng nhập số. ")]
         public string SoLuong { get; set; }             
 
-        [Required(ErrorMessage = "Vui lòng không bỏ trống Mục đích sử dụng. ")]
+        //[Required(ErrorMessage = "Vui lòng không bỏ trống Mục đích sử dụng. ")]
         [Display(Name = "Mục đích sử dụng")]
         public string MucDich { get; set; }
 
