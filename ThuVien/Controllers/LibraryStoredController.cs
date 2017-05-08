@@ -50,7 +50,7 @@ namespace ThuVien.Controllers
                 Response.Cookies["Step1Cookies"]["DuTruFrom"] = step1.DuTruFrom.ToString();
                 Response.Cookies["Step1Cookies"]["DuTruTo"] = step1.DuTruTo.ToString();
                 Response.Cookies["Step1Cookies"]["SoLuongSV"] = step1.SoLuongSV;
-                Response.Cookies["Step1Cookies"].Expires = DateTime.Now.AddDays(1);
+                //Response.Cookies["Step1Cookies"].Expires = DateTime.Now.AddDays(1);
                 return RedirectToAction("Step2");
             }
             else
@@ -72,7 +72,7 @@ namespace ThuVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult Step2(Step2Model step2, int sId, int tId)
+        public ActionResult Step2(Step2Model step2, int sId, int tId, string done)
         {
             Step1Model step1 = new Step1Model();
             if (ModelState.IsValid)
@@ -111,8 +111,6 @@ namespace ThuVien.Controllers
                 };
 
                 db.MonHoc.Add(MonHoc);
-
-                db.SaveChanges();
 
                 switch (step2.MucDich)
                 {
@@ -166,8 +164,6 @@ namespace ThuVien.Controllers
 
                                 db.TL_Sach.Add(document);
 
-                                db.SaveChanges();
-
                                 var gv = new GiangVien()
                                 {
                                     HoTen = step1.HoTen,
@@ -179,8 +175,6 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-
-                                db.SaveChanges();
 
                                 break;
                             }
@@ -212,7 +206,6 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_Sach.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -225,7 +218,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                         default:
@@ -256,7 +249,6 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_Sach.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -269,7 +261,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                     }
@@ -306,7 +298,6 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -319,7 +310,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                         case 1:
@@ -350,7 +341,6 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -363,7 +353,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                         default:
@@ -394,7 +384,6 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -407,7 +396,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                     }
@@ -430,7 +419,6 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -443,7 +431,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                         case 1:
@@ -460,7 +448,6 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -473,7 +460,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                         default:
@@ -490,7 +477,6 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
-                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -503,16 +489,23 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.GiangVien.Add(gv);
-                                db.SaveChanges();
+
                                 break;
                             }
                     }
                 }
-
+                db.SaveChanges();
                 //////////////////////////////////
 
                 Response.Cookies["Step1Cookies"].Expires = DateTime.Now.AddDays(-1);
-                return RedirectToAction("Index");
+                if (done == "0")
+                {
+                    return RedirectToAction("Index");
+                }
+                if (done == "1")
+                {
+                    return RedirectToAction("Step2");
+                }
             }
             ViewBag.sId = sId;
             ViewBag.tId = tId;

@@ -10,9 +10,7 @@
 <script src="~/Scripts/MicrosoftMvcAjax.js"></script>
 <script src="~/Scripts/MicrosoftMvcValidation.js"></script>
 <script src="~/Scripts/MvcFoolproofValidation.js"></script>
-
-
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
     function SelectType() {
@@ -202,21 +200,7 @@
         });
 
     });
-    
-
-
-   
-
 </script>
-
-@if (ViewBag.Error != null)
-{
-    foreach (var item in ViewBag.Error)
-    {
-    @item <br />
-    }
-}
-
 
 @*@Html.DropDownList("Type", (IEnumerable<SelectListItem>)ViewBag.Type, "--Vui lòng chọn--", new { @class = "selectionType", onchange = "SelectType()" })*@
 @Html.DropDownListFor(x => x.Nguon, new SelectList(Model.TypeOptions, "TypeId", "Value"), "--Vui lòng chọn--", new { @class = "selectionType", onchange = "SelectType()" })
@@ -234,390 +218,449 @@
     <div class="library" style="display:none">
         @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
         {
-            
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="row">
-                    <input type="hidden" name="tId" value="0" />
-                    <input type="hidden" name="sId" value="0" />
-                    @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "0", style = "display: none;" })
-                    @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
-                    @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.TL_Sach.TraCuu)
-                    </div>
 
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.TL_Sach.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
-                    </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <input type="hidden" name="tId" value="0" />
+            <input type="hidden" name="sId" value="0" />
+            @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "0", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
+            @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.TraCuu)
+            </div>
 
-                    @Html.ValidationMessageFor(x => x.TL_Sach.TraCuu, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+            </div>
 
-                    <br />
-                    <br />
-                    <br />
+            @Html.ValidationMessageFor(x => x.TL_Sach.TraCuu, "", new { @class = "text-danger" })
 
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
-                    </div>
+            <br />
+            <br />
+            <br />
 
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
-                    </div>
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+            </div>
 
-                    @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+            </div>
 
-                    <br />
-                    <br />
+            @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
 
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.DangDuTru)
-                    </div>
+            <br />
+            <br />
 
-                    <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
-                    </div>
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.DangDuTru)
+            </div>
 
-                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+            </div>
 
-                    <br />
-                    <br />
+            @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
 
-                    <div class="quantity">
-                        <div class="col-md-2">
-                            @Html.DisplayNameFor(x => x.SoLuong)
-                        </div>
+            <br />
+            <br />
 
-                        <div class="col-md-4">
-                            @Html.TextBoxFor(x => x.SoLuong)
-                        </div>
-
-                        @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
-                                                
-                        <br />
-                        <br />
-                    </div>
-
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.MucDich)
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
-                    </div>
-
-                    @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
-
-                    <br />
-                    <br />
-
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.TL_Sach.YKien)
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.TL_Sach.YKien)
-                    </div>
-
-                    <br />
-                    <br />
+            <div class="quantity">
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.SoLuong)
                 </div>
 
-                <input type="submit" value="Hoàn tất" />
-                <input type="button" value="Nhập Lại" class="refresh" />
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.SoLuong)
+                </div>
+
+                @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+            </div>
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.MucDich)
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+            </div>
+
+            @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <br />
+            <br />
+        </div>
+
+        <input type="button" value="Nhập Lại" class="refresh" />
+        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_book_libraty">Hoàn Tất</button>
+
+        <div class="container">
+
+            <!-- Modal -->
+            <div class="modal fade" id="RequestModal_book_libraty" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thông Báo !</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                            <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                            <button type="submit" name="done" value="1">Tiếp Tục</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         }
-
     </div>
 
     <div class="normal" style="display:none">
         @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
         {
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <input type="hidden" name="tId" value="0" />
+        <input type="hidden" name="sId" value="2" />
+        @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "2", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Nguon, new { @Value = "2", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
 
-            <input type="hidden" name="tId" value="0" />
-            <input type="hidden" name="sId" value="2" />
-            @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "2", style = "display: none;" })
-            @Html.TextBoxFor(x => x.Nguon, new { @Value = "2", style = "display: none;" })
-            @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+            </div>
 
-            <div class="row">
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq" })
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.TacGia)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.NXB)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.NXB)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.DangDuTru)
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+            </div>
+
+            @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="quantity">
                 <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+                    @Html.DisplayNameFor(x => x.SoLuong)
                 </div>
 
                 <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq" })
+                    @Html.TextBoxFor(x => x.SoLuong)
                 </div>
 
-                @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.TacGia)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.NXB)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.NXB)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.DangDuTru)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
-                </div>
-
-                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="quantity">
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.SoLuong)
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.SoLuong)
-                    </div>
-
-                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
-
-                    <br />
-                    <br />
-                </div>
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.MucDich)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
-                </div>
-
-                @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.YKien)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.YKien)
-                </div>
+                @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
 
                 <br />
                 <br />
             </div>
 
-            <input type="submit" value="Hoàn tất" />
-            <input type="button" value="Nhập Lại" class="refresh" />
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.MucDich)
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+            </div>
+
+            @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <br />
+            <br />
+        </div>
+
+        <input type="button" value="Nhập Lại" class="refresh" />
+        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_book_normal">Hoàn Tất</button>
+
+        <div class="container">
+
+            <!-- Modal -->
+            <div class="modal fade" id="RequestModal_book_normal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thông Báo !</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                            <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                            <button type="submit" name="done" value="1">Tiếp Tục</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         }
-
     </div>
 
     <div class="instructer" style="display:none">
         @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
         {
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <input type="hidden" name="tId" value="0" />
-            <input type="hidden" name="sId" value="1" />
-            @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "1", style = "display: none;" })
-            @Html.TextBoxFor(x => x.Nguon, new { @Value = "1", style = "display: none;" })
-            @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
+        <input type="hidden" name="tId" value="0" />
+        <input type="hidden" name="sId" value="1" />
+        @Html.TextBoxFor(x => x.TL_Sach.Nguon, new { @Value = "1", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Nguon, new { @Value = "1", style = "display: none;" })
+        @Html.TextBoxFor(x => x.Loai, new { @Value = "0", style = "display: none;" })
 
-            <div class="row">
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq" })
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.TacGia)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.NXB)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.NXB)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
+            </div>
+
+            @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.DangDuTru)
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+            </div>
+
+            @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="quantity">
                 <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.NhanDe)
+                    @Html.DisplayNameFor(x => x.SoLuong)
                 </div>
 
                 <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @class = "test_rq"})
+                    @Html.TextBoxFor(x => x.SoLuong)
                 </div>
 
-                @Html.ValidationMessageFor(x => x.TL_Sach.NhanDe, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.TacGia)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.TacGia)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.TacGia, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.NXB)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.NXB)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.NXB, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.LanXuatBan)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.LanXuatBan, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.ChiTiet)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.ChiTiet)
-                </div>
-
-                @Html.ValidationMessageFor(x => x.TL_Sach.ChiTiet, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.DangDuTru)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
-                </div>
-
-                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="quantity">
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.SoLuong)
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.SoLuong)
-                    </div>
-
-                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
-
-                    <br />
-                    <br />
-                </div>
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.MucDich)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
-                </div>
-
-                @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
-
-                <br />
-                <br />
-
-                <div class="col-md-2">
-                    @Html.DisplayNameFor(x => x.TL_Sach.YKien)
-                </div>
-
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.TL_Sach.YKien)
-                </div>
+                @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
 
                 <br />
                 <br />
             </div>
 
-            <input type="submit" value="Hoàn tất" />
-            <input type="button" value="Nhập Lại" class="refresh" />
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.MucDich)
+            </div>
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+            </div>
+
+            @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
+
+            <br />
+            <br />
+
+            <div class="col-md-2">
+                @Html.DisplayNameFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TL_Sach.YKien)
+            </div>
+
+            <br />
+            <br />
+        </div>
+
+        <input type="button" value="Nhập Lại" class="refresh" />
+        <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_book_instructer">Hoàn Tất</button>
+
+        <div class="container">
+
+            <!-- Modal -->
+            <div class="modal fade" id="RequestModal_book_instructer" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thông Báo !</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                            <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                            <button type="submit" name="done" value="1">Tiếp Tục</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         }
-
     </div>
-
-
-
-
-
-
-
 </div>
 
-
-
 <div id="paper" style="display:none">
-<h2>Bài Báo</h2>
+    <h2>Bài Báo</h2>
     <div class="col-md-2">
         @Html.DisplayNameFor(x => x.TL_BaiBao.Nguon)
     </div>
@@ -627,31 +670,28 @@
     </div>
 
     <div class="row">
-       
 
+        <div class="library" style="display:none">
+            @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
+            {
 
-<div class="library" style="display:none">
-    @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
-    {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="tId" value="1" />
+                <input type="hidden" name="sId" value="0" />
+                @Html.TextBoxFor(x => x.TL_BaiBao.Nguon, new { @Value = "0", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
+                @Html.TextBoxFor(x => x.Loai, new { @Value = "1", style = "display: none;" })
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="hidden" name="tId" value="1" />
-        <input type="hidden" name="sId" value="0" />
-        @Html.TextBoxFor(x => x.TL_BaiBao.Nguon, new { @Value = "0", style = "display: none;" })
-        @Html.TextBoxFor(x => x.Nguon, new { @Value = "0", style = "display: none;" })
-        @Html.TextBoxFor(x => x.Loai, new { @Value = "1", style = "display: none;" })
+                <br />
+                <br />
 
-        <br />
-        <br />
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.TraCuu)
+                </div>
 
-
-            <div class="col-md-2">
-                @Html.DisplayNameFor(x => x.TL_BaiBao.TraCuu)
-            </div>
-
-            <div class="col-md-4">
-                @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
-            </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu)<p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+                </div>
 
                 <br />
                 <br />
@@ -674,11 +714,11 @@
                     @Html.DisplayNameFor(x => x.DangDuTru)
                 </div>
 
-                    <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
-                    </div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                </div>
 
-                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
 
                 <br />
                 <br />
@@ -722,15 +762,35 @@
                 <br />
                 <br />
 
-                <input type="submit" value="Hoàn tất" />
                 <input type="button" value="Nhập Lại" class="refresh" />
+                <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_paper_library">Hoàn Tất</button>
 
-    }
+                <div class="container">
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="RequestModal_paper_library" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Thông Báo !</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                    <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                    <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-</div>
-
+            }
+        </div>
 
         <div class="normal" style="display:none">
             @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
@@ -745,9 +805,6 @@
 
                 <br />
                 <br />
-
-
-
 
                 <div class="col-md-2">
                     @Html.DisplayNameFor(x => x.TL_BaiBao.TenBai)
@@ -815,11 +872,11 @@
                     @Html.DisplayNameFor(x => x.DangDuTru)
                 </div>
 
-                    <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
-                    </div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
+                </div>
 
-                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
 
                 <br />
                 <br />
@@ -863,9 +920,33 @@
                 <br />
                 <br />
 
-
-                <input type="submit" value="Hoàn tất" />
                 <input type="button" value="Nhập Lại" class="refresh" />
+                <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_paper_normal">Hoàn Tất</button>
+
+                <div class="container">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="RequestModal_paper_normal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Thông Báo !</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                    <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                    <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             }
         </div>
 
@@ -883,9 +964,6 @@
                 <br />
                 <br />
 
-
-
-
                 <div class="col-md-2">
                     @Html.DisplayNameFor(x => x.TL_BaiBao.TenBai)
                 </div>
@@ -956,62 +1034,80 @@
                     @Html.DropDownListFor(x => x.DangDuTru, new SelectList(Model.ReserveOptions, "ReserveId", "Value"), "--Vui lòng chọn--", new { @class = "selectionReserve", onchange = "SelectReserve(this)" })
                 </div>
 
-                    @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(x => x.DangDuTru, "", new { @class = "text-danger" })
 
-                    <br />
-                    <br />
+                <br />
+                <br />
 
-                    <div class="quantity">
-                        <div class="col-md-2">
-                            @Html.DisplayNameFor(x => x.SoLuong)
-                        </div>
-
-                        <div class="col-md-4">
-                            @Html.TextBoxFor(x => x.SoLuong)
-                        </div>
-
-
-                        @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
-
-                        <br />
-                        <br />
-                    </div>
+                <div class="quantity">
                     <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.MucDich)
+                        @Html.DisplayNameFor(x => x.SoLuong)
                     </div>
 
                     <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                        @Html.TextBoxFor(x => x.SoLuong)
                     </div>
 
-                    @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(x => x.SoLuong, "", new { @class = "text-danger" })
 
                     <br />
                     <br />
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.MucDich)
+                </div>
 
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.TL_BaiBao.YKien)
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.MucDich, new SelectList(Model.PurposeOptions, "PurposeId", "Value"), "--Vui lòng chọn--")
+                </div>
+
+                @Html.ValidationMessageFor(x => x.MucDich, "", new { @class = "text-danger" })
+
+                <br />
+                <br />
+
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_BaiBao.YKien)
+                </div>
+
+                <br />
+                <br />
+
+                <input type="button" value="Nhập Lại" class="refresh" />
+                <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_paper_intructer">Hoàn Tất</button>
+
+                <div class="container">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="RequestModal_paper_intructer" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Thông Báo !</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                    <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                    <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.TL_BaiBao.YKien)
-                    </div>
-
-                    <br />
-                    <br />
-
-
-                    <input type="submit" value="Hoàn tất" />
-                    <input type="button" value="Nhập Lại" class="refresh" />
             }
         </div>
-
-
-
-        </div>
     </div>
-
-
+</div>
 
 <div id="other" style="display:none">
     <h2>Khác</h2>
@@ -1023,7 +1119,7 @@
         @Html.DropDownListFor(x => x.TL_Khac.Nguon, new SelectList(Model.SourceOptions, "SourceId", "Value"), "--Vui lòng chọn--", new { @class = "selectionSource", onchange = "SelectSource(this)" })
     </div>
     <div class="normal" style="display:none">
-       
+
         @using (Html.BeginForm("Step2", "LibraryStored", FormMethod.Post, new { @class = "InputForm" }))
         {
 
@@ -1085,17 +1181,37 @@
 
                 <br />
                 <br />
-
             </div>
 
-            <input type="submit" value="Hoàn tất" />
             <input type="button" value="Nhập Lại" class="refresh" />
+            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_other_normal">Hoàn Tất</button>
+
+            <div class="container">
+
+                <!-- Modal -->
+                <div class="modal fade" id="RequestModal_other_normal" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thông Báo !</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         }
-
-
     </div>
-
 
     <div class="instructer" style="display:none">
 
@@ -1160,18 +1276,37 @@
 
                 <br />
                 <br />
-
             </div>
 
-            <input type="submit" value="Hoàn tất" />
             <input type="button" value="Nhập Lại" class="refresh" />
+            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_other_intructer">Hoàn Tất</button>
+
+            <div class="container">
+
+                <!-- Modal -->
+                <div class="modal fade" id="RequestModal_other_intructer" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thông Báo !</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         }
-
-
     </div>
-
-
 
     <div class="library" style="display:none">
 
@@ -1190,20 +1325,18 @@
                 <br />
                 <br />
 
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(x => x.TL_Khac.TraCuu)
+                </div>
 
-                    <div class="col-md-2">
-                        @Html.DisplayNameFor(x => x.TL_Khac.TraCuu)
-                    </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TL_Khac.TraCuu) <p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
+                </div>
 
-                    <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.TL_Khac.TraCuu) <p>Lấy link tại <a target="_blank" href="http://idiscovery.tdt.edu.vn/primo_library/libweb/action/search.do">đây</a> </p>
-                    </div>
-
-                    @Html.ValidationMessageFor(x => x.TL_Khac.TraCuu, "", new { @class = "text-danger" })
-                    <br />
-                    <br />
+                @Html.ValidationMessageFor(x => x.TL_Khac.TraCuu, "", new { @class = "text-danger" })
                 <br />
-
+                <br />
+                <br />
 
                 <div class="col-md-2">
                     @Html.DisplayNameFor(x => x.MucDich)
@@ -1227,15 +1360,35 @@
 
                 <br />
                 <br />
-
             </div>
 
-            <input type="submit" value="Hoàn tất" />
             <input type="button" value="Nhập Lại" class="refresh" />
+            <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target="#RequestModal_other_libraty">Hoàn Tất</button>
+
+            <div class="container">
+
+                <!-- Modal -->
+                <div class="modal fade" id="RequestModal_other_libraty" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Thông Báo !</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Chọn <a style="color:red; font-weight:bold">Lưu và Thoát</a> để lưu thông tin dự trữ và thoát. </p>
+                                <p>Chọn <a style="color:red; font-weight:bold">Tiếp Tục</a> để lưu thông tin dự trữ và tiếp tục nhập tài liệu mới. </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="done" value="0">Lưu và Thoát</button>
+                                <button type="submit" name="done" value="1">Tiếp Tục</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         }
-
-
     </div>
-
 </div>
