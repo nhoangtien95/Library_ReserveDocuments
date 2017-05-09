@@ -20,5 +20,7 @@ namespace ThuVien.DAL
         void InsertData(int tId, int sId, Step1Model step1, Step2Model step2);
 
         int PasteData(int tId, int sId, Step2Model step2, TL_Sach book, TL_BaiBao paper, TL_Khac other);
+
+        DataViewModel getData(DataViewModel data);
     }
 }

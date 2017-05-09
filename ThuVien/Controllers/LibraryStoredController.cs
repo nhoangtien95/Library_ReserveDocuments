@@ -111,6 +111,7 @@ namespace ThuVien.Controllers
                 };
 
                 db.MonHoc.Add(MonHoc);
+                db.SaveChanges();
 
                 switch (step2.MucDich)
                 {
@@ -163,6 +164,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_Sach.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -206,6 +208,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_Sach.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -249,6 +252,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_Sach.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -298,6 +302,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -341,6 +346,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -384,6 +390,7 @@ namespace ThuVien.Controllers
                                 }
 
                                 db.TL_BaiBao.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -419,6 +426,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -448,6 +456,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -477,6 +486,7 @@ namespace ThuVien.Controllers
                                 };
 
                                 db.TL_Khac.Add(document);
+                                db.SaveChanges();
 
                                 var gv = new GiangVien()
                                 {
@@ -497,9 +507,9 @@ namespace ThuVien.Controllers
                 db.SaveChanges();
                 //////////////////////////////////
 
-                Response.Cookies["Step1Cookies"].Expires = DateTime.Now.AddDays(-1);
                 if (done == "0")
                 {
+                    Response.Cookies["Step1Cookies"].Expires = DateTime.Now.AddDays(-1);
                     return RedirectToAction("Index");
                 }
                 if (done == "1")
