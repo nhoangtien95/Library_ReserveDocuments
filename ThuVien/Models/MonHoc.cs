@@ -26,7 +26,7 @@ namespace ThuVien.Models
         public string Nganh { get; set; }
 
         [Required]
-        [Display(Name = "Mã nhóm lớp")]
+        [Display(Name = "Mã lớp")]
         public string Nhom { get; set; }
 
         [Required]

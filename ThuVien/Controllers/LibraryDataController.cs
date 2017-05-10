@@ -48,5 +48,11 @@ namespace ThuVien.Controllers
             ViewBag.DataList = list;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(DataViewModel model)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
