@@ -120,6 +120,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <h2>Thông tin giảng viên</h2>
+                                        @Html.HiddenFor(x => x.gv.ID, new { @Value = gv.gv.ID })
                                         <p>Tên giảng viên: </p> @Html.TextBoxFor(x => x.gv.HoTen, new { @Value = gv.gv.HoTen })
                                         <p>Số thẻ: </p> @Html.TextBoxFor(x => x.gv.SoThe, new { @Value = gv.gv.SoThe })
                                         <p>Khoa: </p> @Html.TextBoxFor(x => x.gv.Khoa, new { @Value = gv.gv.Khoa })
@@ -146,6 +147,8 @@
                                             <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_Sach.ChiTiet, new { @Value = gv.TL_Sach.ChiTiet })
                                             <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_Sach.DangDuTru, new { @Value = gv.TL_Sach.DangDuTru })
                                             <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_Sach.SoLuong, new { @Value = gv.TL_Sach.SoLuong })
+                                            @Html.HiddenFor(x => x.TL_Sach.Nguon, new { @Value = gv.TL_Sach.Nguon })
+                                            @Html.HiddenFor(x => x.TL_Sach.MucDich, new { @Value = gv.TL_Sach.MucDich })
                                         }
                                         else if (gv.TL_BaiBao != null)
                                         {
@@ -157,12 +160,16 @@
                                             <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet, new { @Value = gv.TL_BaiBao.ChiTiet })
                                             <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_BaiBao.DangDuTru, new { @Value = gv.TL_BaiBao.DangDuTru })
                                             <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_BaiBao.SoLuong, new { @Value = gv.TL_BaiBao.SoLuong })
+                                            @Html.HiddenFor(x => x.TL_BaiBao.Nguon, new { @Value = gv.TL_BaiBao.Nguon })
+                                            @Html.HiddenFor(x => x.TL_BaiBao.MucDich, new { @Value = gv.TL_BaiBao.MucDich })
                                         }
                                         else
                                         {
                                             <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Khac.TraCuu, new { @Value = gv.TL_Khac.TraCuu })
                                             <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Khac.NhanDe, new { @Value = gv.TL_Khac.NhanDe })
                                             <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Khac.TacGia, new { @Value = gv.TL_Khac.TacGia })
+                                            @Html.HiddenFor(x => x.TL_Khac.Nguon, new { @Value = gv.TL_Khac.Nguon })
+                                            @Html.HiddenFor(x => x.TL_Khac.MucDich, new { @Value = gv.TL_Khac.MucDich })
                                         }
                                     </div>
                                     <div class="modal-footer">

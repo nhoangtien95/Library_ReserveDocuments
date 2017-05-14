@@ -52,37 +52,72 @@ namespace ThuVien.Controllers
         [HttpPost]
         public ActionResult Index(DataViewModel model)
         {
-            var gv = db.GiangVien.First(x => x.ID == model.gv.ID);
-            gv.HoTen = model.gv.HoTen;
-            gv.Khoa = model.gv.Khoa;
-            gv.SoThe = model.gv.SoThe;
-            gv.DienThoai = model.gv.DienThoai;
-            db.Entry(gv).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-
-            var mh = db.MonHoc.First(x => x.ID == model.gv.MonHocId);
-            mh.CourseID = model.mh.CourseID;
-            mh.TenMon = model.mh.TenMon;
-            mh.Nganh = model.mh.Nganh;
-            mh.HK = model.mh.HK;
-            mh.DuTruFrom = model.mh.DuTruFrom;
-            mh.DuTruTo = model.mh.DuTruTo;
-            mh.SoLuongSV = model.mh.SoLuongSV;
-
-            db.Entry(mh).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-
-            if (model.gv.BookId != null)
+            if (ModelState.IsValid)
             {
-                var book = db.TL_Sach.First(x => x.ID == model.gv.BookId);
-            }
-            else if (model.gv.PaperId != null)
-            {
-                var paper = db.TL_BaiBao.First(x => x.ID == model.gv.PaperId);
-            }
-            else
-            {
-                var other = db.TL_Khac.First(x => x.ID == model.gv.OtherId);
+                var gv = db.GiangVien.First(x => x.ID == model.gv.ID);
+                gv.HoTen = model.gv.HoTen;
+                gv.Khoa = model.gv.Khoa;
+                gv.SoThe = model.gv.SoThe;
+                gv.DienThoai = model.gv.DienThoai;
+                db.Entry(gv).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                var mh = db.MonHoc.First(x => x.ID == gv.MonHocId);
+                mh.CourseID = model.mh.CourseID;
+                mh.TenMon = model.mh.TenMon;
+                mh.Nganh = model.mh.Nganh;
+                mh.HK = model.mh.HK;
+                mh.DuTruFrom = model.mh.DuTruFrom;
+                mh.DuTruTo = model.mh.DuTruTo;
+                mh.SoLuongSV = model.mh.SoLuongSV;
+
+                db.Entry(mh).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                if (gv.BookId != null)
+                {
+                    var book = db.TL_Sach.First(x => x.ID == gv.BookId);
+
+                    book.TraCuu = model.TL_Sach.TraCuu;
+                    book.NhanDe = model.TL_Sach.NhanDe;
+                    book.TacGia = model.TL_Sach.TacGia;
+                    book.NXB = model.TL_Sach.NXB;
+                    book.LanXuatBan = model.TL_Sach.LanXuatBan;
+                    book.ChiTiet = model.TL_Sach.ChiTiet;
+                    book.DangDuTru = model.TL_Sach.DangDuTru;
+                    book.SoLuong = model.TL_Sach.SoLuong;
+
+                    db.Entry(book).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else if (gv.PaperId != null)
+                {
+                    var paper = db.TL_BaiBao.First(x => x.ID == gv.PaperId);
+
+                    paper.TraCuu = model.TL_BaiBao.TraCuu;
+                    paper.TenBai = model.TL_BaiBao.TenBai;
+                    paper.TacGia = model.TL_BaiBao.TacGia;
+                    paper.TenTapChi = model.TL_BaiBao.TenTapChi;
+                    paper.PhatHanh = model.TL_BaiBao.PhatHanh;
+                    paper.ChiTiet = model.TL_BaiBao.ChiTiet;
+                    paper.DangDuTru = model.TL_BaiBao.DangDuTru;
+                    paper.SoLuong = model.TL_BaiBao.SoLuong;
+
+                    db.Entry(paper).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var other = db.TL_Khac.First(x => x.ID == gv.OtherId);
+                    other.TraCuu = model.TL_BaiBao.TraCuu;
+                    other.NhanDe = model.TL_BaiBao.TenBai;
+                    other.TacGia = model.TL_BaiBao.TacGia;
+
+                    db.Entry(other).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
