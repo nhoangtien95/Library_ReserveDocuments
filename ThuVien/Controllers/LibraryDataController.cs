@@ -52,6 +52,39 @@ namespace ThuVien.Controllers
         [HttpPost]
         public ActionResult Index(DataViewModel model)
         {
+            var gv = db.GiangVien.First(x => x.ID == model.gv.ID);
+            gv.HoTen = model.gv.HoTen;
+            gv.Khoa = model.gv.Khoa;
+            gv.SoThe = model.gv.SoThe;
+            gv.DienThoai = model.gv.DienThoai;
+            db.Entry(gv).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            var mh = db.MonHoc.First(x => x.ID == model.gv.MonHocId);
+            mh.CourseID = model.mh.CourseID;
+            mh.TenMon = model.mh.TenMon;
+            mh.Nganh = model.mh.Nganh;
+            mh.HK = model.mh.HK;
+            mh.DuTruFrom = model.mh.DuTruFrom;
+            mh.DuTruTo = model.mh.DuTruTo;
+            mh.SoLuongSV = model.mh.SoLuongSV;
+
+            db.Entry(mh).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            if (model.gv.BookId != null)
+            {
+                var book = db.TL_Sach.First(x => x.ID == model.gv.BookId);
+            }
+            else if (model.gv.PaperId != null)
+            {
+                var paper = db.TL_BaiBao.First(x => x.ID == model.gv.PaperId);
+            }
+            else
+            {
+                var other = db.TL_Khac.First(x => x.ID == model.gv.OtherId);
+            }
+
             return RedirectToAction("Index");
         }
     }

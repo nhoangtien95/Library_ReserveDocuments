@@ -29,29 +29,28 @@
 
 <h2>Thông Tin Dự Trữ</h2>
 
-<table>
+<table style="text-align:center; ">
     <tr>
-        <th>Họ và tên GV</th>
-        <th>Số thẻ</th>
-        <th>Khoa</th>
-        <th>ĐT</th>
-        <th>Mã MH</th>
-        <th>Tên MH</th>
-        <th>Chuyên ngành đào tạo</th>
-        <th>Mã lớp</th>
-        <th>HK/Năm học</th>
-        <th>Thời gian dự trữ</th>
-        <th>Số lượng SV</th>
-        <th>Link tài liệu</th>
-        <th>Nhan đề sách/Tên bài viết</th>
-        <th>Tác giả</th>
-        <th>NXB/Tên tạp chí</th>
-        <th>Lần/năm xuất bản(phát hành)</th>
-        <th>Chi tiết</th>
-        <th>Dạng dự trữ</th>
-        <th>Số lượng bản giấy</th>
-        <th>Mục đích</th>
-        <th>Ý kiến</th>
+        <th style="text-align:center; min-width:80px;">Họ và tên GV</th>
+        <th style="text-align:center; ">Số thẻ</th>
+        <th style="text-align:center; ">Khoa</th>
+        <th style="text-align:center; ">ĐT</th>
+        <th style="text-align:center; ">Mã MH</th>
+        <th style="text-align:center; ">Tên MH</th>
+        <th style="text-align:center; ">Chuyên ngành đào tạo</th>
+        <th style="text-align:center; ">Mã lớp</th>
+        <th style="text-align:center; ">HK/Năm học</th>
+        <th style="text-align:center; ">Thời gian dự trữ</th>
+        <th style="text-align:center; ">Số lượng SV</th>
+        <th style="text-align:center; ">Link tài liệu</th>
+        <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
+        <th style="text-align:center; ">Tác giả</th>
+        <th style="text-align:center; ">NXB/Tên tạp chí</th>
+        <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
+        <th style="text-align:center; min-width: 75px">Chi tiết</th>
+        <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
+        <th style="text-align:center; ">Số lượng bản giấy</th>
+        <th style="text-align:center; "></th>
     </tr>
 
     @foreach (var item in list.GroupBy(x => x.gv.SoThe))
@@ -69,7 +68,7 @@
                 <td>@gv.mh.Nganh</td>
                 <td>@gv.mh.Nhom</td>
                 <td>@gv.mh.HK</td>
-                <td>@gv.mh.DuTruFrom.ToShortDateString() " - " @gv.mh.DuTruTo.ToShortDateString()</td>
+                <td>@gv.mh.DuTruFrom.ToShortDateString()  -  @gv.mh.DuTruTo.ToShortDateString()</td>
                 <td>@gv.mh.SoLuongSV</td>
                 @if (@gv.TL_Sach != null)
                 {
@@ -81,8 +80,6 @@
                     <td>@gv.TL_Sach.ChiTiet</td>
                     <td>@gv.TL_Sach.DangDuTru</td>
                     <td>@gv.TL_Sach.SoLuong</td>
-                    <td>@gv.TL_Sach.MucDich</td>
-                    <td>@gv.TL_Sach.YKien</td>
                 }
                 else if (@gv.TL_BaiBao != null)
                 {
@@ -94,8 +91,6 @@
                     <td>@gv.TL_BaiBao.ChiTiet</td>
                     <td>@gv.TL_BaiBao.DangDuTru</td>
                     <td>@gv.TL_BaiBao.SoLuong</td>
-                    <td>@gv.TL_BaiBao.MucDich</td>
-                    <td>@gv.TL_BaiBao.YKien</td>
                 }
                 else
                 {
@@ -107,13 +102,11 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>@gv.TL_Khac.MucDich</td>
-                    <td>@gv.TL_Khac.YKien</td>
                 }
 
-                <td>
+                <td style="text-align:left">
 
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=@className>Open Large Modal</button>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=@className>Chỉnh sửa</button>
 
                     @using (Html.BeginForm("Index", "LibraryData", FormMethod.Post))
                     {
@@ -136,10 +129,10 @@
                                         <p>Mã môn học: </p> @Html.TextBoxFor(x => x.mh.CourseID, new { @Value = gv.mh.CourseID })
                                         <p>Tên môn học: </p> @Html.TextBoxFor(x => x.mh.TenMon, new { @Value = gv.mh.TenMon })
                                         <p>Ngành: </p> @Html.TextBoxFor(x => x.mh.Nganh, new { @Value = gv.mh.Nganh })
-                                        <p>Nhóm: </p> @Html.TextBoxFor(x => x.mh.Nhom, new { @Value = gv.mh.Nhom })
+                                        <p>Mã nhóm: </p> @Html.TextBoxFor(x => x.mh.Nhom, new { @Value = gv.mh.Nhom })
                                         <p>Học Kỳ: </p> @Html.TextBoxFor(x => x.mh.HK, new { @Value = gv.mh.HK })
-                                        <p>Dự trữ từ: </p> @Html.TextBoxFor(x => x.mh.DuTruFrom, "{0:dd/MM/yyyy}", new { @class = "test", @Value = gv.mh.DuTruFrom })
-                                        <p>Dự trữ đến: </p> @Html.TextBoxFor(x => x.mh.DuTruTo, "{0:dd/MM/yyyy}", new { @class = "test", @Value = gv.mh.DuTruTo })
+                                        <p>Dự trữ từ: </p> @Html.TextBoxFor(x => x.mh.DuTruFrom, new { @class = "test", @Value = gv.mh.DuTruFrom.ToShortDateString(), @id = classNumber })
+                                        <p>Dự trữ đến: </p> @Html.TextBoxFor(x => x.mh.DuTruTo, new { @class = "test", @Value = gv.mh.DuTruTo.ToShortDateString(), @id = classNumber + "a" })
                                         <p>Số lượng SV: </p> @Html.TextBoxFor(x => x.mh.SoLuongSV, new { @Value = gv.mh.SoLuongSV })
                                         <hr />
                                         <h2>Thông tin dự trữ</h2>
@@ -153,7 +146,6 @@
                                             <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_Sach.ChiTiet, new { @Value = gv.TL_Sach.ChiTiet })
                                             <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_Sach.DangDuTru, new { @Value = gv.TL_Sach.DangDuTru })
                                             <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_Sach.SoLuong, new { @Value = gv.TL_Sach.SoLuong })
-                                            <p>Mục đích: </p> @Html.TextBoxFor(x => x.TL_Sach.MucDich, new { @Value = gv.TL_Sach.MucDich })
                                         }
                                         else if (gv.TL_BaiBao != null)
                                         {
@@ -165,19 +157,16 @@
                                             <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet, new { @Value = gv.TL_BaiBao.ChiTiet })
                                             <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_BaiBao.DangDuTru, new { @Value = gv.TL_BaiBao.DangDuTru })
                                             <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_BaiBao.SoLuong, new { @Value = gv.TL_BaiBao.SoLuong })
-                                            <p>Mục đích: </p> @Html.TextBoxFor(x => x.TL_BaiBao.MucDich, new { @Value = gv.TL_BaiBao.MucDich })
                                         }
                                         else
                                         {
                                             <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Khac.TraCuu, new { @Value = gv.TL_Khac.TraCuu })
                                             <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Khac.NhanDe, new { @Value = gv.TL_Khac.NhanDe })
                                             <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Khac.TacGia, new { @Value = gv.TL_Khac.TacGia })
-                                            <p>Mục đích: </p> @Html.TextBoxFor(x => x.TL_Khac.MucDich, new { @Value = gv.TL_Khac.MucDich })
                                         }
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="abc" />
-                                        <button type="submit" class="btn btn-default" data-dismiss="modal">Xác nhận</button>
+                                        <input type="submit" class="btn btn-default" value="Xác nhận" />
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                                     </div>
                                 </div>

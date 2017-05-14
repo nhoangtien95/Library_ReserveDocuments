@@ -38,14 +38,14 @@ namespace ThuVien.Controllers
             if (ModelState.IsValid)
             {
                 if (data == null) data = new DataRepository(db);
-                Response.Cookies["Step1Cookies"]["HoTen"] = step1.HoTen;
-                Response.Cookies["Step1Cookies"]["SoThe"] = step1.SoThe;
-                Response.Cookies["Step1Cookies"]["Khoa"] = step1.Khoa;
+                Response.Cookies["Step1Cookies"]["HoTen"] = Server.UrlEncode(step1.HoTen);
+                Response.Cookies["Step1Cookies"]["SoThe"] = Server.UrlEncode(step1.SoThe);
+                Response.Cookies["Step1Cookies"]["Khoa"] = Server.UrlEncode(step1.Khoa);
                 Response.Cookies["Step1Cookies"]["DienThoai"] = step1.DienThoai;
                 Response.Cookies["Step1Cookies"]["CourseID"] = step1.CourseID;
-                Response.Cookies["Step1Cookies"]["TenMon"] = step1.TenMon;
-                Response.Cookies["Step1Cookies"]["Nganh"] = step1.Nganh;
-                Response.Cookies["Step1Cookies"]["Nhom"] = step1.Nhom;
+                Response.Cookies["Step1Cookies"]["TenMon"] = Server.UrlEncode(step1.TenMon);
+                Response.Cookies["Step1Cookies"]["Nganh"] = Server.UrlEncode(step1.Nganh);
+                Response.Cookies["Step1Cookies"]["Nhom"] = Server.UrlEncode(step1.Nhom);
                 Response.Cookies["Step1Cookies"]["HK"] = step1.HK;
                 Response.Cookies["Step1Cookies"]["DuTruFrom"] = step1.DuTruFrom.ToString();
                 Response.Cookies["Step1Cookies"]["DuTruTo"] = step1.DuTruTo.ToString();
@@ -79,14 +79,14 @@ namespace ThuVien.Controllers
             {
                 var from = DateTime.ParseExact(Server.HtmlEncode(Request.Cookies["Step1Cookies"]["DuTruFrom"]), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 var to = DateTime.ParseExact(Server.HtmlEncode(Request.Cookies["Step1Cookies"]["DuTruTo"]), "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-                step1.HoTen = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["HoTen"]);
-                step1.SoThe = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["SoThe"]);
-                step1.Khoa = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["Khoa"]);
+                step1.HoTen = Server.UrlDecode(Request.Cookies["Step1Cookies"]["HoTen"]);
+                step1.SoThe = Server.UrlDecode(Request.Cookies["Step1Cookies"]["SoThe"]);
+                step1.Khoa = Server.UrlDecode(Request.Cookies["Step1Cookies"]["Khoa"]);
                 step1.DienThoai = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["DienThoai"]);
                 step1.CourseID = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["CourseID"]);
-                step1.TenMon = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["TenMon"]);
-                step1.Nganh = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["Nganh"]);
-                step1.Nhom = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["Nhom"]);
+                step1.TenMon = Server.UrlDecode(Request.Cookies["Step1Cookies"]["TenMon"]);
+                step1.Nganh = Server.UrlDecode(Request.Cookies["Step1Cookies"]["Nganh"]);
+                step1.Nhom = Server.UrlDecode(Request.Cookies["Step1Cookies"]["Nhom"]);
                 step1.HK = Server.HtmlEncode(Request.Cookies["Step1Cookies"]["HK"]);
                 step1.DuTruFrom = from;
                 step1.DuTruTo = to;
