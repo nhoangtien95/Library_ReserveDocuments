@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201705041807085_imtired.Designer.cs">
       <DependentUpon>201705041807085_imtired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705150520042_update_tableGV.cs" />
+    <Compile Include="Migrations\201705150520042_update_tableGV.Designer.cs">
+      <DependentUpon>201705150520042_update_tableGV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\DataRepository.cs" />
     <Compile Include="DAL\DB.cs" />
     <Compile Include="Interfaces\IData.cs" />
@@ -337,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705041807085_imtired.resx">
       <DependentUpon>201705041807085_imtired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705150520042_update_tableGV.resx">
+      <DependentUpon>201705150520042_update_tableGV.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -22,7 +22,9 @@
                     HoTen = "Nguyen Van A",
                     Khoa = "CNTT",
                     SoThe = "0123456789",
-                    DienThoai = "0123456789"
+                    DienThoai = "0123456789",
+                    MonHocId = 1,
+                    BookId = 1
                 }
             };
             gv.ForEach(s => context.GiangVien.AddOrUpdate(p => p.HoTen, s));
@@ -64,8 +66,6 @@
             };
             tailieu.ForEach(s => context.TaiLieu.AddOrUpdate(p => p.LoaiTaiLieu, s));
             context.SaveChanges();
-
         }
     }
-    
 }

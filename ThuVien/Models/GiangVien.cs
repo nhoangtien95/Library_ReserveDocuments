@@ -34,5 +34,8 @@ namespace ThuVien.Models
         public int? BookId { get; set; }
         public int? PaperId { get; set; }
         public int? OtherId { get; set; }
+
+        public int Status { get; set; }
+        public string Note { get; set; }
     }
 }

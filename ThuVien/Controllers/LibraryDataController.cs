@@ -59,6 +59,8 @@ namespace ThuVien.Controllers
                 gv.Khoa = model.gv.Khoa;
                 gv.SoThe = model.gv.SoThe;
                 gv.DienThoai = model.gv.DienThoai;
+                gv.Status = model.gv.Status;
+                gv.Note = model.gv.Note;
                 db.Entry(gv).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
@@ -109,9 +111,9 @@ namespace ThuVien.Controllers
                 else
                 {
                     var other = db.TL_Khac.First(x => x.ID == gv.OtherId);
-                    other.TraCuu = model.TL_BaiBao.TraCuu;
-                    other.NhanDe = model.TL_BaiBao.TenBai;
-                    other.TacGia = model.TL_BaiBao.TacGia;
+                    other.TraCuu = model.TL_Khac.TraCuu;
+                    other.NhanDe = model.TL_Khac.NhanDe;
+                    other.TacGia = model.TL_Khac.TacGia;
 
                     db.Entry(other).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();

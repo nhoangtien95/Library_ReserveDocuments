@@ -6,6 +6,24 @@
     int classNumber = 0;
     var className = '.' + classNumber.ToString() + 'a';
     var classModal = classNumber.ToString() + 'a';
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Chưa xử lý",
+        Value = "0"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Đang xử lý",
+        Value = "1"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Đã xử lý",
+        Value = "2"
+    });
+
 }
 <style>
     table {
@@ -15,11 +33,46 @@
     table, th, td {
         border: 1px solid black;
     }
+
+    body {
+        padding: 10px;
+    }
+
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    #exTab2 h3 {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
 </style>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
 
 <script>
     $(function () {
@@ -29,169 +82,263 @@
 
 <h2>Thông Tin Dự Trữ</h2>
 
-<table style="text-align:center; ">
-    <tr>
-        <th style="text-align:center; min-width:80px;">Họ và tên GV</th>
-        <th style="text-align:center; ">Số thẻ</th>
-        <th style="text-align:center; ">Khoa</th>
-        <th style="text-align:center; ">ĐT</th>
-        <th style="text-align:center; ">Mã MH</th>
-        <th style="text-align:center; ">Tên MH</th>
-        <th style="text-align:center; ">Chuyên ngành đào tạo</th>
-        <th style="text-align:center; ">Mã lớp</th>
-        <th style="text-align:center; ">HK/Năm học</th>
-        <th style="text-align:center; ">Thời gian dự trữ</th>
-        <th style="text-align:center; ">Số lượng SV</th>
-        <th style="text-align:center; ">Link tài liệu</th>
-        <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
-        <th style="text-align:center; ">Tác giả</th>
-        <th style="text-align:center; ">NXB/Tên tạp chí</th>
-        <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
-        <th style="text-align:center; min-width: 75px">Chi tiết</th>
-        <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
-        <th style="text-align:center; ">Số lượng bản giấy</th>
-        <th style="text-align:center; "></th>
-    </tr>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#home" role="tab" data-toggle="tab">
+            <icon class="fa fa-home"></icon> Tài Nguyên
+        </a>
+    </li>
+    <li>
+        <a href="#profile" role="tab" data-toggle="tab">
+            <i class="fa fa-user"></i> Thống Kê
+        </a>
+    </li>
+</ul>
 
-    @foreach (var item in list.GroupBy(x => x.gv.SoThe))
-    {
-        <tr>
-            @foreach (var gv in item)
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="home">
+        <table style="text-align:center; ">
+            <tr>
+                <th style="text-align:center; min-width:80px;">Họ và tên GV</th>
+                <th style="text-align:center; ">Số thẻ</th>
+                <th style="text-align:center; ">Khoa</th>
+                <th style="text-align:center; ">ĐT</th>
+                <th style="text-align:center; ">Mã MH</th>
+                <th style="text-align:center; ">Tên MH</th>
+                <th style="text-align:center; ">Chuyên ngành đào tạo</th>
+                <th style="text-align:center; ">Mã lớp</th>
+                <th style="text-align:center; ">HK/Năm học</th>
+                <th style="text-align:center; ">Thời gian dự trữ</th>
+                <th style="text-align:center; ">Số lượng SV</th>
+                <th style="text-align:center; ">Link tài liệu</th>
+                <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
+                <th style="text-align:center; ">Tác giả</th>
+                <th style="text-align:center; ">NXB/Tên tạp chí</th>
+                <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
+                <th style="text-align:center; min-width: 75px">Chi tiết</th>
+                <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
+                <th style="text-align:center; ">Số lượng bản giấy</th>
+                <th style="text-align:center; ">Tình trạng</th>
+                <th style="text-align:center; min-width: 100px">Ghi chú</th>
+                <th style="text-align:center; ">Chuyển tab</th>
+                <th style="text-align:center; "></th>
+            </tr>
+
+            @foreach (var item in list.GroupBy(x => x.gv.SoThe))
             {
-            <tr class=@bb>
-                <td>@gv.gv.HoTen</td>
-                <td>@gv.gv.SoThe</td>
-                <td>@gv.gv.Khoa</td>
-                <td>@gv.gv.DienThoai</td>
-                <td>@gv.mh.CourseID</td>
-                <td>@gv.mh.TenMon</td>
-                <td>@gv.mh.Nganh</td>
-                <td>@gv.mh.Nhom</td>
-                <td>@gv.mh.HK</td>
-                <td>@gv.mh.DuTruFrom.ToShortDateString()  -  @gv.mh.DuTruTo.ToShortDateString()</td>
-                <td>@gv.mh.SoLuongSV</td>
-                @if (@gv.TL_Sach != null)
-                {
-                    <td>@gv.TL_Sach.TraCuu</td>
-                    <td>@gv.TL_Sach.NhanDe</td>
-                    <td>@gv.TL_Sach.TacGia</td>
-                    <td>@gv.TL_Sach.NXB</td>
-                    <td>@gv.TL_Sach.LanXuatBan</td>
-                    <td>@gv.TL_Sach.ChiTiet</td>
-                    <td>@gv.TL_Sach.DangDuTru</td>
-                    <td>@gv.TL_Sach.SoLuong</td>
-                }
-                else if (@gv.TL_BaiBao != null)
-                {
-                    <td>@gv.TL_BaiBao.TraCuu</td>
-                    <td>@gv.TL_BaiBao.TenBai</td>
-                    <td>@gv.TL_BaiBao.TacGia</td>
-                    <td>@gv.TL_BaiBao.TenTapChi</td>
-                    <td>@gv.TL_BaiBao.PhatHanh</td>
-                    <td>@gv.TL_BaiBao.ChiTiet</td>
-                    <td>@gv.TL_BaiBao.DangDuTru</td>
-                    <td>@gv.TL_BaiBao.SoLuong</td>
-                }
-                else
-                {
-                    <td>@gv.TL_Khac.TraCuu</td>
-                    <td>@gv.TL_Khac.NhanDe</td>
-                    <td>@gv.TL_Khac.TacGia</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                }
+                <tr>
+                    @foreach (var gv in item)
+                    {
+                    <tr class=@bb>
+                        <td>@gv.gv.HoTen</td>
+                        <td>@gv.gv.SoThe</td>
+                        <td>@gv.gv.Khoa</td>
+                        <td>@gv.gv.DienThoai</td>
+                        <td>@gv.mh.CourseID</td>
+                        <td>@gv.mh.TenMon</td>
+                        <td>@gv.mh.Nganh</td>
+                        <td>@gv.mh.Nhom</td>
+                        <td>@gv.mh.HK</td>
+                        <td>@gv.mh.DuTruFrom.ToShortDateString()  -  @gv.mh.DuTruTo.ToShortDateString()</td>
+                        <td>@gv.mh.SoLuongSV</td>
+                        @if (@gv.TL_Sach != null)
+                        {
+                            <td>@gv.TL_Sach.TraCuu</td>
+                            <td>@gv.TL_Sach.NhanDe</td>
+                            <td>@gv.TL_Sach.TacGia</td>
+                            <td>@gv.TL_Sach.NXB</td>
+                            <td>@gv.TL_Sach.LanXuatBan</td>
+                            <td>@gv.TL_Sach.ChiTiet</td>
+                            <td>@gv.TL_Sach.DangDuTru</td>
+                            <td>@gv.TL_Sach.SoLuong</td>
+                            <td>
+                                @switch (gv.gv.Status)
+                        {
+                            case 0:
+                                {
+                                            <p>Chưa xử lý</p>
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            <p>Đang xử lý</p>
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            <p>Đã xử lý</p>
+                                            break;
+                                        }
+                                }
+                            </td>
+                            <td>@gv.gv.Note</td>
+                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
+                        }
+                        else if (@gv.TL_BaiBao != null)
+                        {
+                            <td>@gv.TL_BaiBao.TraCuu</td>
+                            <td>@gv.TL_BaiBao.TenBai</td>
+                            <td>@gv.TL_BaiBao.TacGia</td>
+                            <td>@gv.TL_BaiBao.TenTapChi</td>
+                            <td>@gv.TL_BaiBao.PhatHanh</td>
+                            <td>@gv.TL_BaiBao.ChiTiet</td>
+                            <td>@gv.TL_BaiBao.DangDuTru</td>
+                            <td>@gv.TL_BaiBao.SoLuong</td>
+                            <td>
+                                @switch (gv.gv.Status)
+                        {
+                            case 0:
+                                {
+                                            <p>Chưa xử lý</p>
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            <p>Đang xử lý</p>
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            <p>Đã xử lý</p>
+                                            break;
+                                        }
+                                }
+                            </td>
+                            <td>@gv.gv.Note</td>
+                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
+                        }
+                        else
+                        {
+                            <td>@gv.TL_Khac.TraCuu</td>
+                            <td>@gv.TL_Khac.NhanDe</td>
+                            <td>@gv.TL_Khac.TacGia</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                @switch (gv.gv.Status)
+                        {
+                            case 0:
+                                {
+                                            <p>Chưa xử lý</p>
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            <p>Đang xử lý</p>
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            <p>Đã xử lý</p>
+                                            break;
+                                        }
+                                }
+                            </td>
+                            <td>@gv.gv.Note</td>
+                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
+                        }
 
-                <td style="text-align:left">
+                        <td style="text-align:left">
 
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=@className>Chỉnh sửa</button>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=@className>Chỉnh sửa</button>
 
-                    @using (Html.BeginForm("Index", "LibraryData", FormMethod.Post))
+                            @using (Html.BeginForm("Index", "LibraryData", FormMethod.Post))
                     {
 
-                        <div class="modal fade @classModal" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Thông Tin Chi Tiết</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2>Thông tin giảng viên</h2>
-                                        @Html.HiddenFor(x => x.gv.ID, new { @Value = gv.gv.ID })
-                                        <p>Tên giảng viên: </p> @Html.TextBoxFor(x => x.gv.HoTen, new { @Value = gv.gv.HoTen })
-                                        <p>Số thẻ: </p> @Html.TextBoxFor(x => x.gv.SoThe, new { @Value = gv.gv.SoThe })
-                                        <p>Khoa: </p> @Html.TextBoxFor(x => x.gv.Khoa, new { @Value = gv.gv.Khoa })
-                                        <p>Điện thoại: </p> @Html.TextBoxFor(x => x.gv.DienThoai, new { @Value = gv.gv.DienThoai })
-                                        <hr />
-                                        <h2>Thông tin môn học</h2>
-                                        <p>Mã môn học: </p> @Html.TextBoxFor(x => x.mh.CourseID, new { @Value = gv.mh.CourseID })
-                                        <p>Tên môn học: </p> @Html.TextBoxFor(x => x.mh.TenMon, new { @Value = gv.mh.TenMon })
-                                        <p>Ngành: </p> @Html.TextBoxFor(x => x.mh.Nganh, new { @Value = gv.mh.Nganh })
-                                        <p>Mã nhóm: </p> @Html.TextBoxFor(x => x.mh.Nhom, new { @Value = gv.mh.Nhom })
-                                        <p>Học Kỳ: </p> @Html.TextBoxFor(x => x.mh.HK, new { @Value = gv.mh.HK })
-                                        <p>Dự trữ từ: </p> @Html.TextBoxFor(x => x.mh.DuTruFrom, new { @class = "test", @Value = gv.mh.DuTruFrom.ToShortDateString(), @id = classNumber })
-                                        <p>Dự trữ đến: </p> @Html.TextBoxFor(x => x.mh.DuTruTo, new { @class = "test", @Value = gv.mh.DuTruTo.ToShortDateString(), @id = classNumber + "a" })
-                                        <p>Số lượng SV: </p> @Html.TextBoxFor(x => x.mh.SoLuongSV, new { @Value = gv.mh.SoLuongSV })
-                                        <hr />
-                                        <h2>Thông tin dự trữ</h2>
-                                        @if (gv.TL_Sach != null)
-                                        {
-                                            <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Sach.TraCuu, new { @Value = gv.TL_Sach.TraCuu })
-                                            <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @Value = gv.TL_Sach.NhanDe })
-                                            <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Sach.TacGia, new { @Value = gv.TL_Sach.TacGia })
-                                            <p>Nhà xuất bản: </p> @Html.TextBoxFor(x => x.TL_Sach.NXB, new { @Value = gv.TL_Sach.NXB })
-                                            <p>Lần/Năm xuất bản: </p> @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan, new { @Value = gv.TL_Sach.LanXuatBan })
-                                            <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_Sach.ChiTiet, new { @Value = gv.TL_Sach.ChiTiet })
-                                            <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_Sach.DangDuTru, new { @Value = gv.TL_Sach.DangDuTru })
-                                            <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_Sach.SoLuong, new { @Value = gv.TL_Sach.SoLuong })
-                                            @Html.HiddenFor(x => x.TL_Sach.Nguon, new { @Value = gv.TL_Sach.Nguon })
-                                            @Html.HiddenFor(x => x.TL_Sach.MucDich, new { @Value = gv.TL_Sach.MucDich })
-                                        }
-                                        else if (gv.TL_BaiBao != null)
-                                        {
-                                            <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu, new { @Value = gv.TL_BaiBao.TraCuu })
-                                            <p>Tên bài viết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TenBai, new { @Value = gv.TL_BaiBao.TenBai })
-                                            <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TacGia, new { @Value = gv.TL_BaiBao.TacGia })
-                                            <p>Tên tạp chí: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TenTapChi, new { @Value = gv.TL_BaiBao.TenTapChi })
-                                            <p>Số/Năm phát hành: </p> @Html.TextBoxFor(x => x.TL_BaiBao.PhatHanh, new { @Value = gv.TL_BaiBao.PhatHanh })
-                                            <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet, new { @Value = gv.TL_BaiBao.ChiTiet })
-                                            <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_BaiBao.DangDuTru, new { @Value = gv.TL_BaiBao.DangDuTru })
-                                            <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_BaiBao.SoLuong, new { @Value = gv.TL_BaiBao.SoLuong })
-                                            @Html.HiddenFor(x => x.TL_BaiBao.Nguon, new { @Value = gv.TL_BaiBao.Nguon })
-                                            @Html.HiddenFor(x => x.TL_BaiBao.MucDich, new { @Value = gv.TL_BaiBao.MucDich })
-                                        }
-                                        else
-                                        {
-                                            <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Khac.TraCuu, new { @Value = gv.TL_Khac.TraCuu })
-                                            <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Khac.NhanDe, new { @Value = gv.TL_Khac.NhanDe })
-                                            <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Khac.TacGia, new { @Value = gv.TL_Khac.TacGia })
-                                            @Html.HiddenFor(x => x.TL_Khac.Nguon, new { @Value = gv.TL_Khac.Nguon })
-                                            @Html.HiddenFor(x => x.TL_Khac.MucDich, new { @Value = gv.TL_Khac.MucDich })
-                                        }
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="submit" class="btn btn-default" value="Xác nhận" />
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                <div class="modal fade @classModal" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Thông Tin Chi Tiết</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h2>Thông tin giảng viên</h2>
+                                                @Html.HiddenFor(x => x.gv.ID, new { @Value = gv.gv.ID })
+                                                <p>Tên giảng viên: </p> @Html.TextBoxFor(x => x.gv.HoTen, new { @Value = gv.gv.HoTen })
+                                                <p>Số thẻ: </p> @Html.TextBoxFor(x => x.gv.SoThe, new { @Value = gv.gv.SoThe })
+                                                <p>Khoa: </p> @Html.TextBoxFor(x => x.gv.Khoa, new { @Value = gv.gv.Khoa })
+                                                <p>Điện thoại: </p> @Html.TextBoxFor(x => x.gv.DienThoai, new { @Value = gv.gv.DienThoai })
+                                                <hr />
+                                                <h2>Thông tin môn học</h2>
+                                                <p>Mã môn học: </p> @Html.TextBoxFor(x => x.mh.CourseID, new { @Value = gv.mh.CourseID })
+                                                <p>Tên môn học: </p> @Html.TextBoxFor(x => x.mh.TenMon, new { @Value = gv.mh.TenMon })
+                                                <p>Ngành: </p> @Html.TextBoxFor(x => x.mh.Nganh, new { @Value = gv.mh.Nganh })
+                                                <p>Mã nhóm: </p> @Html.TextBoxFor(x => x.mh.Nhom, new { @Value = gv.mh.Nhom })
+                                                <p>Học Kỳ: </p> @Html.TextBoxFor(x => x.mh.HK, new { @Value = gv.mh.HK })
+                                                <p>Dự trữ từ: </p> @Html.TextBoxFor(x => x.mh.DuTruFrom, new { @class = "test", @Value = gv.mh.DuTruFrom.ToShortDateString(), @id = classNumber })
+                                                <p>Dự trữ đến: </p> @Html.TextBoxFor(x => x.mh.DuTruTo, new { @class = "test", @Value = gv.mh.DuTruTo.ToShortDateString(), @id = classNumber + "a" })
+                                                <p>Số lượng SV: </p> @Html.TextBoxFor(x => x.mh.SoLuongSV, new { @Value = gv.mh.SoLuongSV })
+                                                <hr />
+                                                <h2>Thông tin dự trữ</h2>
+                                                @if (gv.TL_Sach != null)
+                                                {
+                                                    <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Sach.TraCuu, new { @Value = gv.TL_Sach.TraCuu })
+                                                    <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @Value = gv.TL_Sach.NhanDe })
+                                                    <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Sach.TacGia, new { @Value = gv.TL_Sach.TacGia })
+                                                    <p>Nhà xuất bản: </p> @Html.TextBoxFor(x => x.TL_Sach.NXB, new { @Value = gv.TL_Sach.NXB })
+                                                    <p>Lần/Năm xuất bản: </p> @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan, new { @Value = gv.TL_Sach.LanXuatBan })
+                                                    <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_Sach.ChiTiet, new { @Value = gv.TL_Sach.ChiTiet })
+                                                    <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_Sach.DangDuTru, new { @Value = gv.TL_Sach.DangDuTru })
+                                                    <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_Sach.SoLuong, new { @Value = gv.TL_Sach.SoLuong })
+                                                    @Html.HiddenFor(x => x.TL_Sach.Nguon, new { @Value = gv.TL_Sach.Nguon })
+                                                    @Html.HiddenFor(x => x.TL_Sach.MucDich, new { @Value = gv.TL_Sach.MucDich })
+                                                }
+                                                else if (gv.TL_BaiBao != null)
+                                                {
+                                                    <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu, new { @Value = gv.TL_BaiBao.TraCuu })
+                                                    <p>Tên bài viết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TenBai, new { @Value = gv.TL_BaiBao.TenBai })
+                                                    <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TacGia, new { @Value = gv.TL_BaiBao.TacGia })
+                                                    <p>Tên tạp chí: </p> @Html.TextBoxFor(x => x.TL_BaiBao.TenTapChi, new { @Value = gv.TL_BaiBao.TenTapChi })
+                                                    <p>Số/Năm phát hành: </p> @Html.TextBoxFor(x => x.TL_BaiBao.PhatHanh, new { @Value = gv.TL_BaiBao.PhatHanh })
+                                                    <p>Chi tiết: </p> @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet, new { @Value = gv.TL_BaiBao.ChiTiet })
+                                                    <p>Dạng dự trữ: </p> @Html.TextBoxFor(x => x.TL_BaiBao.DangDuTru, new { @Value = gv.TL_BaiBao.DangDuTru })
+                                                    <p>Số lượng bản giấy: </p> @Html.TextBoxFor(x => x.TL_BaiBao.SoLuong, new { @Value = gv.TL_BaiBao.SoLuong })
+                                                    @Html.HiddenFor(x => x.TL_BaiBao.Nguon, new { @Value = gv.TL_BaiBao.Nguon })
+                                                    @Html.HiddenFor(x => x.TL_BaiBao.MucDich, new { @Value = gv.TL_BaiBao.MucDich })
+                                                }
+                                                else
+                                                {
+                                                    <p>Tra cứu: </p> @Html.TextBoxFor(x => x.TL_Khac.TraCuu, new { @Value = gv.TL_Khac.TraCuu })
+                                                    <p>Nhan đề: </p> @Html.TextBoxFor(x => x.TL_Khac.NhanDe, new { @Value = gv.TL_Khac.NhanDe })
+                                                    <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Khac.TacGia, new { @Value = gv.TL_Khac.TacGia })
+                                                    @Html.HiddenFor(x => x.TL_Khac.Nguon, new { @Value = gv.TL_Khac.Nguon })
+                                                    @Html.HiddenFor(x => x.TL_Khac.MucDich, new { @Value = gv.TL_Khac.MucDich })
+                                                }
+                                                <h2>Tùy chỉnh</h2>
+                                                <p>Trạng thái</p>
+                                                @Html.DropDownListFor(x => x.gv.Status, listItems, "--Vui lòng chọn--", new { })
+                                                <p>Ghi chú</p>
+                                                @Html.TextAreaFor(x => x.gv.Note)
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-default" value="Xác nhận" />
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    }
-                    @{
-                        classNumber++;
-                        className = '.' + classNumber.ToString() + 'a';
-                        classModal = classNumber.ToString() + 'a';
-                    }
-            </tr>
+                            }
+                            @{
+                                classNumber++;
+                                className = '.' + classNumber.ToString() + 'a';
+                                classModal = classNumber.ToString() + 'a';
+                            }
+                    </tr>
+                                }
+                    @{ bb++;}
+                    </tr>
                         }
-            @{ bb++;}
-            </tr>
-                }
-</table>
-
+        </table>
+    </div>
+    <div class="tab-pane fade" id="profile">
+        <h2>Profile Content Goes Here</h2>
+        <img src="http://lorempixel.com/400/400/cats/2" alt="Cats" />
+    </div>
+</div>
 <hr />
 <hr />
 

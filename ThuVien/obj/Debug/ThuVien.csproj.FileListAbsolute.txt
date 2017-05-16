@@ -78,3 +78,4 @@ E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_S
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_models.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateRela.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.imtired.resources
+E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_tableGV.resources
