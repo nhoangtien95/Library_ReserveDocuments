@@ -6,6 +6,8 @@
     int classNumber = 0;
     var className = '.' + classNumber.ToString() + 'a';
     var classModal = classNumber.ToString() + 'a';
+    var tabName = '.' + classNumber.ToString() + 'b';
+    var tabModal = classNumber.ToString() + 'b';
 
     List<SelectListItem> listItems = new List<SelectListItem>();
     listItems.Add(new SelectListItem
@@ -85,12 +87,12 @@
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
         <a href="#home" role="tab" data-toggle="tab">
-            <icon class="fa fa-home"></icon> Tài Nguyên
+            <icon class="fa fa-home"></icon> Dịch Vụ
         </a>
     </li>
     <li>
         <a href="#profile" role="tab" data-toggle="tab">
-            <i class="fa fa-user"></i> Thống Kê
+            <i class="fa fa-user"></i> Tài Nguyên
         </a>
     </li>
 </ul>
@@ -109,7 +111,7 @@
                 <th style="text-align:center; ">Mã lớp</th>
                 <th style="text-align:center; ">HK/Năm học</th>
                 <th style="text-align:center; ">Thời gian dự trữ</th>
-                <th style="text-align:center; ">Số lượng SV</th>
+                <th style="text-align:center; min-width: 75px" ">Số lượng SV</th>
                 <th style="text-align:center; ">Link tài liệu</th>
                 <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
                 <th style="text-align:center; ">Tác giả</th>
@@ -117,8 +119,8 @@
                 <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
                 <th style="text-align:center; min-width: 75px">Chi tiết</th>
                 <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
-                <th style="text-align:center; ">Số lượng bản giấy</th>
-                <th style="text-align:center; ">Tình trạng</th>
+                <th style="text-align:center; min-width: 75px" ">Số lượng bản giấy</th>
+                <th style="text-align:center; min-width: 75px">Tình trạng</th>
                 <th style="text-align:center; min-width: 100px">Ghi chú</th>
                 <th style="text-align:center; ">Chuyển tab</th>
                 <th style="text-align:center; "></th>
@@ -128,7 +130,7 @@
             {
                 <tr>
                     @foreach (var gv in item)
-                    {
+                {
                     <tr class=@bb>
                         <td>@gv.gv.HoTen</td>
                         <td>@gv.gv.SoThe</td>
@@ -153,9 +155,9 @@
                             <td>@gv.TL_Sach.SoLuong</td>
                             <td>
                                 @switch (gv.gv.Status)
-                        {
-                            case 0:
                                 {
+                                    case 0:
+                                        {
                                             <p>Chưa xử lý</p>
                                             break;
                                         }
@@ -171,8 +173,6 @@
                                         }
                                 }
                             </td>
-                            <td>@gv.gv.Note</td>
-                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
                         }
                         else if (@gv.TL_BaiBao != null)
                         {
@@ -186,9 +186,9 @@
                             <td>@gv.TL_BaiBao.SoLuong</td>
                             <td>
                                 @switch (gv.gv.Status)
-                        {
-                            case 0:
                                 {
+                                    case 0:
+                                        {
                                             <p>Chưa xử lý</p>
                                             break;
                                         }
@@ -204,8 +204,6 @@
                                         }
                                 }
                             </td>
-                            <td>@gv.gv.Note</td>
-                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
                         }
                         else
                         {
@@ -219,9 +217,9 @@
                             <td></td>
                             <td>
                                 @switch (gv.gv.Status)
-                        {
-                            case 0:
                                 {
+                                    case 0:
+                                        {
                                             <p>Chưa xử lý</p>
                                             break;
                                         }
@@ -237,10 +235,86 @@
                                         }
                                 }
                             </td>
-                            <td>@gv.gv.Note</td>
-                            <td><icon class="glyphicon glyphicon-circle-arrow-right"></icon></td>
                         }
 
+                        <td>@gv.gv.Note</td>
+                        <td>
+                            @if (@gv.gv.Status == 2)
+                            {
+                    <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-info btn-default" data-toggle="modal" data-target=@tabName><icon class="glyphicon glyphicon-circle-arrow-right"></icon></button>
+
+                    <!-- Modal -->
+                                using (Html.BeginForm("ChangeTab", "LibraryData", FormMethod.Post))
+                                {
+
+                                    <div class="modal fade @tabModal" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h3 class="modal-title">Chuyển Tab</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h2>Chuyển sang tab Thống Kê</h2>
+                                                    <p>Bạn có muốn chuyển yêu cầu này sang tab <a style="font-weight:bold; color:red">Thống Kê</a> ?</p>
+                                                    <hr />
+                                                    <h2>Thông tin giảng viên</h2>
+                                                    @Html.HiddenFor(x => x.gv.ID, new { @Value = gv.gv.ID })
+                                                    <p>Tên giảng viên: @Html.TextBoxFor(x => x.gv.HoTen, new { @Value = gv.gv.HoTen, @readonly = true })  Số thẻ: @Html.TextBoxFor(x => x.gv.SoThe, new { @Value = gv.gv.SoThe, @readonly = true }) </p>
+                                                    <p>Khoa: @Html.TextBoxFor(x => x.gv.Khoa, new { @Value = gv.gv.Khoa, @readonly = true })   Điện thoại: @Html.TextBoxFor(x => x.gv.DienThoai, new { @Value = gv.gv.DienThoai, @readonly = true }) </p>
+                                                    <p>Ghi chú: @Html.TextAreaFor(x => x.gv.Note, new { @Value = gv.gv.Note, @readonly = true })</p>
+                                                    <hr />
+                                                    <h2>Thông tin môn học</h2>
+                                                    <p>Mã môn học: @Html.TextBoxFor(x => x.mh.CourseID, new { @Value = gv.mh.CourseID, @readonly = true }) Tên môn học: @Html.TextBoxFor(x => x.mh.TenMon, new { @Value = gv.mh.TenMon, @readonly = true })</p>
+                                                    <p>Ngành: @Html.TextBoxFor(x => x.mh.Nganh, new { @Value = gv.mh.Nganh, @readonly = true }) Mã nhóm:  @Html.TextBoxFor(x => x.mh.Nhom, new { @Value = gv.mh.Nhom, @readonly = true })</p>
+                                                    <p>Học Kỳ: @Html.TextBoxFor(x => x.mh.HK, new { @Value = gv.mh.HK, @readonly = true }) Dự trữ từ: @Html.TextBoxFor(x => x.mh.DuTruFrom, new { @Value = gv.mh.DuTruFrom.ToShortDateString(), @id = classNumber, @readonly = true })</p>
+                                                    <p>Dự trữ đến: @Html.TextBoxFor(x => x.mh.DuTruTo, new { @Value = gv.mh.DuTruTo.ToShortDateString(), @id = classNumber + "a", @readonly = true }) Số lượng SV: @Html.TextBoxFor(x => x.mh.SoLuongSV, new { @Value = gv.mh.SoLuongSV, @readonly = true })</p>
+                                                    <hr />
+                                                    <h2>Thông tin dự trữ</h2>
+                                                    @if (gv.TL_Sach != null)
+                                                    {
+                                                        <p>Tra cứu: @Html.TextBoxFor(x => x.TL_Sach.TraCuu, new { @Value = gv.TL_Sach.TraCuu, @readonly = true }) Nhan đề: @Html.TextBoxFor(x => x.TL_Sach.NhanDe, new { @Value = gv.TL_Sach.NhanDe, @readonly = true })</p>
+                                                        <p>Tác giả: @Html.TextBoxFor(x => x.TL_Sach.TacGia, new { @Value = gv.TL_Sach.TacGia, @readonly = true })  Nhà xuất bản: @Html.TextBoxFor(x => x.TL_Sach.NXB, new { @Value = gv.TL_Sach.NXB, @readonly = true })</p>
+                                                        <p>Lần/Năm xuất bản: @Html.TextBoxFor(x => x.TL_Sach.LanXuatBan, new { @Value = gv.TL_Sach.LanXuatBan, @readonly = true }) Chi tiết: @Html.TextBoxFor(x => x.TL_Sach.ChiTiet, new { @Value = gv.TL_Sach.ChiTiet, @readonly = true })</p>
+                                                        <p>Dạng dự trữ: @Html.TextBoxFor(x => x.TL_Sach.DangDuTru, new { @Value = gv.TL_Sach.DangDuTru, @readonly = true }) Số lượng bản giấy: @Html.TextBoxFor(x => x.TL_Sach.SoLuong, new { @Value = gv.TL_Sach.SoLuong, @readonly = true })</p>
+
+                                                        @Html.HiddenFor(x => x.TL_Sach.Nguon, new { @Value = gv.TL_Sach.Nguon, @readonly = true })
+                                                        @Html.HiddenFor(x => x.TL_Sach.MucDich, new { @Value = gv.TL_Sach.MucDich, @readonly = true })
+                                                    }
+                                                    else if (gv.TL_BaiBao != null)
+                                                    {
+                                                        <p>Tra cứu: @Html.TextBoxFor(x => x.TL_BaiBao.TraCuu, new { @Value = gv.TL_BaiBao.TraCuu, @readonly = true })  Tên bài viết: @Html.TextBoxFor(x => x.TL_BaiBao.TenBai, new { @Value = gv.TL_BaiBao.TenBai, @readonly = true })</p>
+                                                        <p>Tác giả: @Html.TextBoxFor(x => x.TL_BaiBao.TacGia, new { @Value = gv.TL_BaiBao.TacGia, @readonly = true }) Tên tạp chí: @Html.TextBoxFor(x => x.TL_BaiBao.TenTapChi, new { @Value = gv.TL_BaiBao.TenTapChi, @readonly = true })</p>
+                                                        <p>Số/Năm phát hành: @Html.TextBoxFor(x => x.TL_BaiBao.PhatHanh, new { @Value = gv.TL_BaiBao.PhatHanh, @readonly = true }) Chi tiết: @Html.TextBoxFor(x => x.TL_BaiBao.ChiTiet, new { @Value = gv.TL_BaiBao.ChiTiet, @readonly = true })</p>
+                                                        <p>Dạng dự trữ: @Html.TextBoxFor(x => x.TL_BaiBao.DangDuTru, new { @Value = gv.TL_BaiBao.DangDuTru, @readonly = true }) Số lượng bản giấy: @Html.TextBoxFor(x => x.TL_BaiBao.SoLuong, new { @Value = gv.TL_BaiBao.SoLuong, @readonly = true })</p>
+
+                                                        @Html.HiddenFor(x => x.TL_BaiBao.Nguon, new { @Value = gv.TL_BaiBao.Nguon, @readonly = true })
+                                                        @Html.HiddenFor(x => x.TL_BaiBao.MucDich, new { @Value = gv.TL_BaiBao.MucDich, @readonly = true })
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Tra cứu: @Html.TextBoxFor(x => x.TL_Khac.TraCuu, new { @Value = gv.TL_Khac.TraCuu, @readonly = true })   Nhan đề: @Html.TextBoxFor(x => x.TL_Khac.NhanDe, new { @Value = gv.TL_Khac.NhanDe, @readonly = true }) </p>
+                                                        <p>Tác giả: </p> @Html.TextBoxFor(x => x.TL_Khac.TacGia, new { @Value = gv.TL_Khac.TacGia, @readonly = true })
+                                                        @Html.HiddenFor(x => x.TL_Khac.Nguon, new { @Value = gv.TL_Khac.Nguon, @readonly = true })
+                                                        @Html.HiddenFor(x => x.TL_Khac.MucDich, new { @Value = gv.TL_Khac.MucDich, @readonly = true })
+                                                    }
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-default" data-dismiss="modal" value="Xác nhận" />
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                            @{
+                                tabName = '.' + classNumber.ToString() + 'b';
+                                tabModal = classNumber.ToString() + 'b';
+                            }
+                        </td>
                         <td style="text-align:left">
 
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=@className>Chỉnh sửa</button>
@@ -312,7 +386,7 @@
                                                 <p>Trạng thái</p>
                                                 @Html.DropDownListFor(x => x.gv.Status, listItems, "--Vui lòng chọn--", new { })
                                                 <p>Ghi chú</p>
-                                                @Html.TextAreaFor(x => x.gv.Note)
+                                                @Html.TextAreaFor(x => x.gv.Note, new { @Value = gv.gv.Note })
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="submit" class="btn btn-default" value="Xác nhận" />

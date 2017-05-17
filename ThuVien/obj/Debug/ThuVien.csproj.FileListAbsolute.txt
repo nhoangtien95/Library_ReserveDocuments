@@ -71,11 +71,5 @@ E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\FoolproofValidation.dll
 E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\Web.Optimization.Bundles.AjaxMin.dll
 E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\Web.Optimization.dll
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.csproj.GenerateResource.Cache
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.addTableHK1.resources
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateID_GV_MH.resources
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.modifyIDnullable.resources
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_STTinHK.resources
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_models.resources
-E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.updateRela.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.imtired.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_tableGV.resources

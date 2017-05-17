@@ -37,5 +37,6 @@ namespace ThuVien.Models
 
         public int Status { get; set; }
         public string Note { get; set; }
+        public int Tab { get; set; }
     }
 }

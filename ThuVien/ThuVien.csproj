@@ -181,43 +181,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\LibraryDataController.cs" />
     <Compile Include="Controllers\LibraryStoredController.cs" />
-    <Compile Include="Migrations\201705031423027_update_STTinHK.cs" />
-    <Compile Include="Migrations\201705031423027_update_STTinHK.Designer.cs">
-      <DependentUpon>201705031423027_update_STTinHK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705041425438_update_models.cs" />
-    <Compile Include="Migrations\201705041425438_update_models.Designer.cs">
-      <DependentUpon>201705041425438_update_models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705041652509_updateRela.cs" />
-    <Compile Include="Migrations\201705041652509_updateRela.Designer.cs">
-      <DependentUpon>201705041652509_updateRela.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201705041807085_imtired.cs" />
     <Compile Include="Migrations\201705041807085_imtired.Designer.cs">
       <DependentUpon>201705041807085_imtired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705150520042_update_tableGV.cs" />
-    <Compile Include="Migrations\201705150520042_update_tableGV.Designer.cs">
-      <DependentUpon>201705150520042_update_tableGV.cs</DependentUpon>
+    <Compile Include="Migrations\201705170717277_update_TableGV.cs" />
+    <Compile Include="Migrations\201705170717277_update_TableGV.Designer.cs">
+      <DependentUpon>201705170717277_update_TableGV.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\DataRepository.cs" />
     <Compile Include="DAL\DB.cs" />
     <Compile Include="Interfaces\IData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705030525342_addTableHK1.cs" />
-    <Compile Include="Migrations\201705030525342_addTableHK1.Designer.cs">
-      <DependentUpon>201705030525342_addTableHK1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031236448_updateID_GV_MH.cs" />
-    <Compile Include="Migrations\201705031236448_updateID_GV_MH.Designer.cs">
-      <DependentUpon>201705031236448_updateID_GV_MH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031255313_modifyIDnullable.cs" />
-    <Compile Include="Migrations\201705031255313_modifyIDnullable.Designer.cs">
-      <DependentUpon>201705031255313_modifyIDnullable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GiangVien.cs" />
@@ -321,29 +297,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705030525342_addTableHK1.resx">
-      <DependentUpon>201705030525342_addTableHK1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031236448_updateID_GV_MH.resx">
-      <DependentUpon>201705031236448_updateID_GV_MH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031255313_modifyIDnullable.resx">
-      <DependentUpon>201705031255313_modifyIDnullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031423027_update_STTinHK.resx">
-      <DependentUpon>201705031423027_update_STTinHK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705041425438_update_models.resx">
-      <DependentUpon>201705041425438_update_models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705041652509_updateRela.resx">
-      <DependentUpon>201705041652509_updateRela.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705041807085_imtired.resx">
       <DependentUpon>201705041807085_imtired.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705150520042_update_tableGV.resx">
-      <DependentUpon>201705150520042_update_tableGV.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705170717277_update_TableGV.resx">
+      <DependentUpon>201705170717277_update_TableGV.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

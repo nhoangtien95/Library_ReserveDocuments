@@ -124,5 +124,14 @@ namespace ThuVien.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult ChangeTab(DataViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
