@@ -86,6 +86,21 @@
     $(function () {
         $(".test").datepicker({ dateFormat: "dd/mm/yy" });
     });
+
+    $(function () {
+        if( @ViewBag.Name != null){
+            $("#Name").val(@ViewBag.Name);
+        }
+        if( @ViewBag.Card != null){
+            $("#Card").val("thevalue");
+        }
+        if( @ViewBag.HK != null){
+            $("#HK").val("thevalue");
+        }
+        if( @ViewBag.Status != null){
+            $("#Status").val("thevalue");
+        }
+    });
 </script>
 
 <h2>Thông Tin Dự Trữ</h2>
@@ -130,11 +145,11 @@
                     <th style="text-align:center; min-width: 75px">Số lượng bản giấy</th>
                     <th style="text-align:center; min-width: 75px">
                         Tình trạng @Html.DropDownList("Status", listItems, "--Vui lòng chọn--", new
-                          {
-                              @class = "filter_1",
-                              name = "Status",
-                              @onchange = "Filter_1();"
-                          })
+                              {
+                                  @class = "filter_1",
+                                  name = "Status",
+                                  @onchange = "Filter_1();"
+                              })
                     </th>
                     <th style="text-align:center; min-width: 100px">Ghi chú</th>
                     <th style="text-align:center; ">Chuyển tab</th>

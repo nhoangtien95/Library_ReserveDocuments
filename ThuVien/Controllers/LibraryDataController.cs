@@ -15,10 +15,20 @@ namespace ThuVien.Controllers
         private DB db = new DB();
 
         // GET: LibraryData
-        public ActionResult Index()
+        public ActionResult Index(string Name, string Card, string HK, string Status)
         {
+            ViewBag.CurrentName = Name;
+            ViewBag.CurrentCard = Card;
+            ViewBag.CurrentHK = HK;
+            ViewBag.CurrentStatus = Status;
+
+            if (Name != null && Card)
+            {
+                Queury_Name = "";
+            }
+
             var list = new List<DataViewModel>();
-            var gv = db.GiangVien.Where(x => x.Tab == 0).ToList();
+            var gv = db.GiangVien.Where(x => x.Tab == 0 || x.HoTen == Name).ToList();
             foreach (var instructer in gv)
             {
                 var model = new DataViewModel();
@@ -178,10 +188,7 @@ namespace ThuVien.Controllers
         [HttpPost]
         public ActionResult DataFilter(string Name, string Card, string HK, string Status)
         {
-            ViewBag.HK = db.HK.Select(m => new SelectListItem { Text = m.Hocky, Value = m.ID.ToString() });
-            ViewBag.Card = db.GiangVien.Select(x => new SelectListItem { Text = x.SoThe, Value = x.SoThe }).Distinct().OrderBy(x => x.Value);
-            ViewBag.Name = db.GiangVien.Select(x => new SelectListItem { Text = x.HoTen, Value = x.HoTen }).Distinct().OrderBy(x => x.Value);
-            return View("Index");
+            return RedirectToAction("Index", new { Name = Name, Card = Card, HK = HK, Status = Status });
         }
     }
 }
