@@ -6,19 +6,19 @@ using System.Web.Mvc;
 using ThuVien.DAL;
 using ThuVien.Models;
 using ThuVien.ViewModels;
+using PagedList;
 
 namespace ThuVien.Controllers
 {
     public class LibraryDataController : Controller
     {
         private DB db = new DB();
-        private IData data;
 
         // GET: LibraryData
         public ActionResult Index()
         {
             var list = new List<DataViewModel>();
-            var gv = db.GiangVien.ToList();
+            var gv = db.GiangVien.Where(x => x.Tab == 0).ToList();
             foreach (var instructer in gv)
             {
                 var model = new DataViewModel();
@@ -45,7 +45,42 @@ namespace ThuVien.Controllers
                 list.Add(model);
             }
 
+            // Resource List
+            var Resourcelist = new List<DataViewModel>();
+            var Resourcegv = db.GiangVien.Where(x => x.Tab == 1).ToList();
+            foreach (var instructer in Resourcegv)
+            {
+                var model = new DataViewModel();
+                model.gv = instructer;
+                var monhoc = db.MonHoc.First(x => x.ID == instructer.MonHocId);
+                model.mh = monhoc;
+
+                if (instructer.BookId != null)
+                {
+                    var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
+                    model.TL_Sach = book;
+                }
+                else if (instructer.PaperId != null)
+                {
+                    var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
+                    model.TL_BaiBao = paper;
+                }
+                else
+                {
+                    var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
+                    model.TL_Khac = other;
+                }
+
+                Resourcelist.Add(model);
+            }
+
             ViewBag.DataList = list;
+            ViewBag.ResourceDataList = Resourcelist;
+
+            ViewBag.HK = db.HK.Select(m => new SelectListItem { Text = m.Hocky, Value = m.ID.ToString() });
+            ViewBag.Card = db.GiangVien.Select(x => new SelectListItem { Text = x.SoThe, Value = x.SoThe }).Distinct().OrderBy(x => x.Value);
+            ViewBag.Name = db.GiangVien.Select(x => new SelectListItem { Text = x.HoTen, Value = x.HoTen }).Distinct().OrderBy(x => x.Value);
+
             return View();
         }
 
@@ -130,8 +165,23 @@ namespace ThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
+                var gv = db.GiangVien.First(x => x.ID == model.gv.ID);
+                gv.Tab = 1;
+                db.Entry(gv).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DataFilter(string Name, string Card, string HK, string Status)
+        {
+            ViewBag.HK = db.HK.Select(m => new SelectListItem { Text = m.Hocky, Value = m.ID.ToString() });
+            ViewBag.Card = db.GiangVien.Select(x => new SelectListItem { Text = x.SoThe, Value = x.SoThe }).Distinct().OrderBy(x => x.Value);
+            ViewBag.Name = db.GiangVien.Select(x => new SelectListItem { Text = x.HoTen, Value = x.HoTen }).Distinct().OrderBy(x => x.Value);
+            return View("Index");
         }
     }
 }

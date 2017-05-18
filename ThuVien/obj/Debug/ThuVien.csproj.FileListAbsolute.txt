@@ -73,3 +73,7 @@ E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\Web.Optimization.dll
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.csproj.GenerateResource.Cache
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.imtired.resources
 E:\SourceCode\Work\Library\ThuVien\ThuVien\obj\Debug\ThuVien.Migrations.update_tableGV.resources
+E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\PagedList.dll
+E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\PagedList.Mvc.dll
+E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\PagedList.xml
+E:\SourceCode\Work\Library\ThuVien\ThuVien\bin\PagedList.Mvc.xml
