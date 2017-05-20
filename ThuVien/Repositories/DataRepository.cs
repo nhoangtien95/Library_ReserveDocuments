@@ -675,5 +675,41 @@ namespace ThuVien.DAL
         {
             return model;
         }
+
+        public List<GiangVien> getList(string Name, string Card, string Status)
+        {
+            var gv = db.GiangVien.Where(x => x.Tab == 0).ToList();
+
+            if (Name != null && Card == null && Status == null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name).ToList();
+            }
+            else if (Name == null && Card != null && Status == null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.SoThe == Card).ToList();
+            }
+            else if (Name == null && Card == null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.Status == int.Parse(Status)).ToList();
+            }
+            else if (Name != null && Card != null && Status == null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.SoThe == Card).ToList();
+            }
+            else if (Name != null && Card == null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.Status == int.Parse(Status)).ToList();
+            }
+            else if (Name == null && Card != null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.SoThe == Card && x.Status == int.Parse(Status)).ToList();
+            }
+            else if (Name != null && Card != null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.SoThe == Card && x.Status == int.Parse(Status)).ToList();
+            }
+
+            return gv;
+        }
     }
 }

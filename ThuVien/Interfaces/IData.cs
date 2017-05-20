@@ -22,5 +22,7 @@ namespace ThuVien.DAL
         int PasteData(int tId, int sId, Step2Model step2, TL_Sach book, TL_BaiBao paper, TL_Khac other);
 
         DataViewModel getData(DataViewModel data);
+
+        List<GiangVien> getList(string Name, string Card, string Status);
     }
 }

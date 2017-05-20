@@ -11,6 +11,7 @@
     var classModal = classNumber.ToString() + 'a';
     var tabName = '.' + classNumber.ToString() + 'b';
     var tabModal = classNumber.ToString() + 'b';
+    var tab = ViewBag.Tab;
 
     List<SelectListItem>
         listItems = new List<SelectListItem>
@@ -85,6 +86,7 @@
 <script>
     $(function () {
         $(".test").datepicker({ dateFormat: "dd/mm/yy" });
+
     });
 
     $(function () {
@@ -106,12 +108,12 @@
 <h2>Thông Tin Dự Trữ</h2>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li class="active">
+    <li class="tab1 active">
         <a href="#home" role="tab" data-toggle="tab">
             <icon class="fa fa-home"></icon> Dịch Vụ
         </a>
     </li>
-    <li>
+    <li class="tab2">
         <a href="#profile" role="tab" data-toggle="tab">
             <i class="fa fa-user"></i> Tài Nguyên
         </a>
@@ -122,17 +124,18 @@
     <div class="tab-pane fade active in" id="home">
         <table style="text-align:center; ">
             <tr>
-                @using (Html.BeginForm("DataFilter", "LibraryData", FormMethod.Post, new { @id = "FilterForm" }))
+                @using (Html.BeginForm("DataFilter", "LibraryData", new { Name_Resource = ViewBag.Form2_Name, Card_Resource = ViewBag.Form2_Card, HK_Resource = ViewBag.Form2_HK }, FormMethod.Post, new { @id = "FilterForm1" }))
                 {
-                    <th style="text-align:center; min-width:80px;">Họ và tên GV @Html.DropDownList("Name", (IEnumerable<SelectListItem>)ViewBag.Name, "--Vui lòng chọn--", new { @class = "filter_1", name = "Name", @onchange = "Filter_1();" })</th>
-                    <th style="text-align:center; ">Số thẻ @Html.DropDownList("Card", (IEnumerable<SelectListItem>)ViewBag.Card, "--Vui lòng chọn--", new { @class = "filter_1", name = "Card", @onchange = "Filter_1();" })</th>
+                    <input type="hidden" value="1" name="tab" />
+                    <th style="text-align:center; min-width:80px;">Họ và tên GV @Html.DropDownList("Name", (IEnumerable<SelectListItem>)ViewBag.Name, "--    Tất cả    --", new { @class = "filter_1", name = "Name", @onchange = "Filter_1();" })</th>
+                    <th style="text-align:center; ">Số thẻ @Html.DropDownList("Card", (IEnumerable<SelectListItem>)ViewBag.Card, "--    Tất cả    --", new { @class = "filter_1", name = "Card", @onchange = "Filter_1();" })</th>
                     <th style="text-align:center; ">Khoa</th>
                     <th style="text-align:center; ">ĐT</th>
                     <th style="text-align:center; ">Mã MH</th>
                     <th style="text-align:center; ">Tên MH</th>
                     <th style="text-align:center; ">Chuyên ngành đào tạo</th>
                     <th style="text-align:center; ">Mã lớp</th>
-                    <th style="text-align:center; ">HK/Năm học @Html.DropDownList("HK", (IEnumerable<SelectListItem>)ViewBag.HK, "--Vui lòng chọn--", new { @class = "filter_1", name = "HK", @onchange = "Filter_1();" })</th>
+                    <th style="text-align:center; ">HK/Năm học @Html.DropDownList("HK", (IEnumerable<SelectListItem>)ViewBag.HK, "--    Tất cả    --", new { @class = "filter_1", name = "HK", @onchange = "Filter_1();" })</th>
                     <th style="text-align:center; ">Thời gian dự trữ</th>
                     <th style="text-align:center; min-width: 75px">Số lượng SV</th>
                     <th style="text-align:center; ">Link tài liệu</th>
@@ -144,7 +147,7 @@
                     <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
                     <th style="text-align:center; min-width: 75px">Số lượng bản giấy</th>
                     <th style="text-align:center; min-width: 75px">
-                        Tình trạng @Html.DropDownList("Status", listItems, "--Vui lòng chọn--", new
+                        Tình trạng @Html.DropDownList("Status", listItems, "--    Tất cả    --", new
                               {
                                   @class = "filter_1",
                                   name = "Status",
@@ -413,7 +416,7 @@
                                                 }
                                                 <h2>Tùy chỉnh</h2>
                                                 <p>Trạng thái</p>
-                                                @Html.DropDownListFor(x => x.gv.Status, listItems, "--Vui lòng chọn--", new { })
+                                                @Html.DropDownListFor(x => x.gv.Status, listItems, "--    Tất cả    --", new { })
                                                 <p>Ghi chú</p>
                                                 @Html.TextAreaFor(x => x.gv.Note, new { @Value = gv.gv.Note })
                                             </div>
@@ -440,29 +443,33 @@
     <div class="tab-pane fade" id="profile">
         <table style="text-align:center; ">
             <tr>
-                <th style="text-align:center; min-width:80px;">Họ và tên GV @Html.DropDownList("Name", (IEnumerable<SelectListItem>)ViewBag.Name, "--Vui lòng chọn--", new { @class = "filter", name = "Name" })</th>
-                <th style="text-align:center; ">Số thẻ @Html.DropDownList("Card", (IEnumerable<SelectListItem>)ViewBag.Card, "--Vui lòng chọn--", new { @class = "filter", name = "Card" })</th>
-                <th style="text-align:center; ">Khoa</th>
-                <th style="text-align:center; ">ĐT</th>
-                <th style="text-align:center; ">Mã MH</th>
-                <th style="text-align:center; ">Tên MH</th>
-                <th style="text-align:center; ">Chuyên ngành đào tạo</th>
-                <th style="text-align:center; ">Mã lớp</th>
-                <th style="text-align:center; ">HK/Năm học @Html.DropDownList("HK", (IEnumerable<SelectListItem>)ViewBag.HK, "--Vui lòng chọn--", new { @class = "filter", name = "HK" })</th>
-                <th style="text-align:center; ">Thời gian dự trữ</th>
-                <th style="text-align:center; min-width: 75px" ">Số lượng SV</th>
-                <th style="text-align:center; ">Link tài liệu</th>
-                <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
-                <th style="text-align:center; ">Tác giả</th>
-                <th style="text-align:center; ">NXB/Tên tạp chí</th>
-                <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
-                <th style="text-align:center; min-width: 75px">Chi tiết</th>
-                <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
-                <th style="text-align:center; min-width: 75px" ">Số lượng bản giấy</th>
-                <th style="text-align:center; min-width: 75px">Tình trạng</th>
-                <th style="text-align:center; min-width: 100px">Ghi chú</th>
-                <th style="text-align:center; ">Chuyển tab</th>
-                <th style="text-align:center; "></th>
+                @using (Html.BeginForm("DataFilter", "LibraryData", new { Name = ViewBag.Form1_Name, Card = ViewBag.Form1_Card, HK = ViewBag.Form1_HK, Status = ViewBag.Form1_Status }, FormMethod.Post, new { @id = "FilterForm2" }))
+                {
+                    <input type="hidden" value="2" name="tab" />
+                    <th style="text-align:center; min-width:80px;">Họ và tên GV @Html.DropDownList("Name_Resource", (IEnumerable<SelectListItem>)ViewBag.Name, "--    Tất cả    --", new { @class = "filter_2", name = "Name_Resource", @onchange = "Filter_2();" })</th>
+                    <th style="text-align:center; ">Số thẻ @Html.DropDownList("Card_Resource", (IEnumerable<SelectListItem>)ViewBag.Card, "--    Tất cả    --", new { @class = "filter_2", name = "Card_Resource", @onchange = "Filter_2();" })</th>
+                    <th style="text-align:center; ">Khoa</th>
+                    <th style="text-align:center; ">ĐT</th>
+                    <th style="text-align:center; ">Mã MH</th>
+                    <th style="text-align:center; ">Tên MH</th>
+                    <th style="text-align:center; ">Chuyên ngành đào tạo</th>
+                    <th style="text-align:center; ">Mã lớp</th>
+                    <th style="text-align:center; ">HK/Năm học @Html.DropDownList("HK_Resource", (IEnumerable<SelectListItem>)ViewBag.HK, "--    Tất cả    --", new { @class = "filter_2", name = "HK_Resource", @onchange = "Filter_2();" })</th>
+                    <th style="text-align:center; ">Thời gian dự trữ</th>
+                    <th style="text-align:center; min-width: 75px">Số lượng SV</th>
+                    <th style="text-align:center; ">Link tài liệu</th>
+                    <th style="text-align:center; ">Nhan đề sách/Tên bài viết</th>
+                    <th style="text-align:center; ">Tác giả</th>
+                    <th style="text-align:center; ">NXB/Tên tạp chí</th>
+                    <th style="text-align:center; ">Lần/năm xuất bản(phát hành)</th>
+                    <th style="text-align:center; min-width: 75px">Chi tiết</th>
+                    <th style="text-align:center; min-width: 75px">Dạng dự trữ</th>
+                    <th style="text-align:center; min-width: 75px">Số lượng bản giấy</th>
+                    <th style="text-align:center; min-width: 75px">Tình trạng</th>
+                    <th style="text-align:center; min-width: 100px">Ghi chú</th>
+                    <th style="text-align:center; ">Chuyển tab</th>
+                    <th style="text-align:center; "></th>
+                }
             </tr>
 
             @foreach (var item in ResourceList.GroupBy(x => x.gv.SoThe))
@@ -721,7 +728,7 @@
                                                 }
                                                 <h2>Tùy chỉnh</h2>
                                                 <p>Trạng thái</p>
-                                                @Html.DropDownListFor(x => x.gv.Status, listItems, "--Vui lòng chọn--", new { })
+                                                @Html.DropDownListFor(x => x.gv.Status, listItems, "--    Tất cả    --", new { })
                                                 <p>Ghi chú</p>
                                                 @Html.TextAreaFor(x => x.gv.Note, new { @Value = gv.gv.Note })
                                             </div>
@@ -756,10 +763,31 @@
         for (i = 0; i < @bb; i++) {
             $('.'+i).css('background',colors[Math.floor(Math.random() * colors.length)]);
         }
+        if ( @ViewBag.Tab == 2)
+        {
+            $(".tab1").removeClass('active');
+            $(".tab2").addClass('active');
+            $('#home').removeClass('active in');
+            $('#profile').addClass('active in');
+        }
     });
 
     function Filter_1() {
-        console.log("abc");
-        $('#FilterForm').submit();
-    }
+        $('#FilterForm1').submit();
+    };
+
+    function Filter_2() {
+        $('#FilterForm2').submit();
+    };
+
+    $(function () {
+
+        if ( @ViewBag.Tab == 2)
+        {
+            $(".tab1").removeClass('active');
+            $(".tab2").addClass('active');
+            $('#home').removeClass('active in');
+            $('#profile').addClass('active in');
+        }
+    });
 </script>

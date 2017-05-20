@@ -13,75 +13,212 @@ namespace ThuVien.Controllers
     public class LibraryDataController : Controller
     {
         private DB db = new DB();
+        private IData data;
+
+        public LibraryDataController()
+        {
+            IData _data = data;
+        }
+
+        public LibraryDataController(IData _data)
+        {
+            this.data = _data;
+        }
 
         // GET: LibraryData
-        public ActionResult Index(string Name, string Card, string HK, string Status)
+        public ActionResult Index(string Name, string Card, string HK, string Status, string Name_Resource, string Card_Resource, string HK_Resource, string tab)
         {
             ViewBag.CurrentName = Name;
             ViewBag.CurrentCard = Card;
             ViewBag.CurrentHK = HK;
             ViewBag.CurrentStatus = Status;
 
-            if (Name != null && Card)
+            var list = new List<DataViewModel>();
+            var gv = db.GiangVien.Where(x => x.Tab == 0).ToList();
+            int stt = 0;
+            if (Status != null)
             {
-                Queury_Name = "";
+                stt = int.Parse(Status);
             }
 
-            var list = new List<DataViewModel>();
-            var gv = db.GiangVien.Where(x => x.Tab == 0 || x.HoTen == Name).ToList();
-            foreach (var instructer in gv)
+            if (Name != null && Card == null && Status == null)
             {
-                var model = new DataViewModel();
-                model.gv = instructer;
-                var monhoc = db.MonHoc.First(x => x.ID == instructer.MonHocId);
-                model.mh = monhoc;
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name).ToList();
+            }
+            else if (Name == null && Card != null && Status == null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.SoThe == Card).ToList();
+            }
+            else if (Name == null && Card == null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.Status == stt).ToList();
+            }
+            else if (Name != null && Card != null && Status == null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.SoThe == Card).ToList();
+            }
+            else if (Name != null && Card == null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.Status == stt).ToList();
+            }
+            else if (Name == null && Card != null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.SoThe == Card && x.Status == stt).ToList();
+            }
+            else if (Name != null && Card != null && Status != null)
+            {
+                gv = db.GiangVien.Where(x => x.Tab == 0 && x.HoTen == Name && x.SoThe == Card && x.Status == stt).ToList();
+            }
 
-                if (instructer.BookId != null)
+            if (HK != null)
+            {
+                int hk = int.Parse(HK);
+                var tenHK = db.HK.FirstOrDefault(x => x.STT == hk);
+                foreach (var instructer in gv)
                 {
-                    var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
-                    model.TL_Sach = book;
-                }
-                else if (instructer.PaperId != null)
-                {
-                    var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
-                    model.TL_BaiBao = paper;
-                }
-                else
-                {
-                    var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
-                    model.TL_Khac = other;
-                }
+                    var model = new DataViewModel();
+                    model.gv = instructer;
+                    var monhoc = db.MonHoc.FirstOrDefault(x => x.ID == instructer.MonHocId && (string.Compare(x.HK, tenHK.Hocky, true) == 0));
+                    //var monhoc = (from x in db.MonHoc where x.ID == instructer.MonHocId && x.HK == tenHK.Hocky select x).Single();
 
-                list.Add(model);
+                    if (monhoc == null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        model.mh = monhoc;
+
+                        if (instructer.BookId != null)
+                        {
+                            var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
+                            model.TL_Sach = book;
+                        }
+                        else if (instructer.PaperId != null)
+                        {
+                            var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
+                            model.TL_BaiBao = paper;
+                        }
+                        else
+                        {
+                            var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
+                            model.TL_Khac = other;
+                        }
+
+                        list.Add(model);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var instructer in gv)
+                {
+                    var model = new DataViewModel();
+                    model.gv = instructer;
+                    var monhoc = db.MonHoc.First(x => x.ID == instructer.MonHocId);
+                    model.mh = monhoc;
+
+                    if (instructer.BookId != null)
+                    {
+                        var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
+                        model.TL_Sach = book;
+                    }
+                    else if (instructer.PaperId != null)
+                    {
+                        var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
+                        model.TL_BaiBao = paper;
+                    }
+                    else
+                    {
+                        var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
+                        model.TL_Khac = other;
+                    }
+
+                    list.Add(model);
+                }
             }
 
             // Resource List
             var Resourcelist = new List<DataViewModel>();
+
             var Resourcegv = db.GiangVien.Where(x => x.Tab == 1).ToList();
-            foreach (var instructer in Resourcegv)
+
+            if (Name_Resource != null && Card_Resource == null)
             {
-                var model = new DataViewModel();
-                model.gv = instructer;
-                var monhoc = db.MonHoc.First(x => x.ID == instructer.MonHocId);
-                model.mh = monhoc;
+                Resourcegv = db.GiangVien.Where(x => x.Tab == 1 && x.HoTen == Name_Resource).ToList();
+            }
+            else if (Name_Resource == null && Card_Resource != null)
+            {
+                Resourcegv = db.GiangVien.Where(x => x.Tab == 1 && x.SoThe == Card_Resource).ToList();
+            }
+            else if (Name_Resource != null && Card_Resource != null)
+            {
+                Resourcegv = db.GiangVien.Where(x => x.Tab == 1 && x.HoTen == Name_Resource && x.SoThe == Card_Resource).ToList();
+            }
 
-                if (instructer.BookId != null)
-                {
-                    var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
-                    model.TL_Sach = book;
-                }
-                else if (instructer.PaperId != null)
-                {
-                    var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
-                    model.TL_BaiBao = paper;
-                }
-                else
-                {
-                    var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
-                    model.TL_Khac = other;
-                }
+            if (HK_Resource != null)
+            {
+                int temphk = int.Parse(HK_Resource);
+                var tenHK_Resource = db.HK.FirstOrDefault(x => x.STT == temphk);
 
-                Resourcelist.Add(model);
+                foreach (var instructer in Resourcegv)
+                {
+                    var model = new DataViewModel();
+                    model.gv = instructer;
+                    var monhoc = db.MonHoc.FirstOrDefault(x => x.ID == instructer.MonHocId && (string.Compare(x.HK, tenHK_Resource.Hocky, true) == 0));
+
+                    if (monhoc == null)
+                    {
+                        continue;
+                    }
+                    model.mh = monhoc;
+
+                    if (instructer.BookId != null)
+                    {
+                        var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
+                        model.TL_Sach = book;
+                    }
+                    else if (instructer.PaperId != null)
+                    {
+                        var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
+                        model.TL_BaiBao = paper;
+                    }
+                    else
+                    {
+                        var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
+                        model.TL_Khac = other;
+                    }
+
+                    Resourcelist.Add(model);
+                }
+            }
+            else
+            {
+                foreach (var instructer in Resourcegv)
+                {
+                    var model = new DataViewModel();
+                    model.gv = instructer;
+                    var monhoc = db.MonHoc.First(x => x.ID == instructer.MonHocId);
+                    model.mh = monhoc;
+
+                    if (instructer.BookId != null)
+                    {
+                        var book = db.TL_Sach.First(x => x.ID == instructer.BookId);
+                        model.TL_Sach = book;
+                    }
+                    else if (instructer.PaperId != null)
+                    {
+                        var paper = db.TL_BaiBao.First(x => x.ID == instructer.PaperId);
+                        model.TL_BaiBao = paper;
+                    }
+                    else
+                    {
+                        var other = db.TL_Khac.First(x => x.ID == instructer.OtherId);
+                        model.TL_Khac = other;
+                    }
+
+                    Resourcelist.Add(model);
+                }
             }
 
             ViewBag.DataList = list;
@@ -90,6 +227,18 @@ namespace ThuVien.Controllers
             ViewBag.HK = db.HK.Select(m => new SelectListItem { Text = m.Hocky, Value = m.ID.ToString() });
             ViewBag.Card = db.GiangVien.Select(x => new SelectListItem { Text = x.SoThe, Value = x.SoThe }).Distinct().OrderBy(x => x.Value);
             ViewBag.Name = db.GiangVien.Select(x => new SelectListItem { Text = x.HoTen, Value = x.HoTen }).Distinct().OrderBy(x => x.Value);
+            if (tab == null)
+            {
+                ViewBag.Tab = "0";
+            }
+            else { ViewBag.Tab = tab; }
+            ViewBag.Form1_Name = Name;
+            ViewBag.Form1_Card = Card;
+            ViewBag.Form1_HK = HK;
+            ViewBag.Form1_Status = Status;
+            ViewBag.Form2_Name = Name_Resource;
+            ViewBag.Form2_Card = Card_Resource;
+            ViewBag.Form2_HK = HK_Resource;
 
             return View();
         }
@@ -186,9 +335,9 @@ namespace ThuVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult DataFilter(string Name, string Card, string HK, string Status)
+        public ActionResult DataFilter(string Name, string Card, string HK, string Status, string Name_Resource, string Card_Resource, string HK_Resource, string tab)
         {
-            return RedirectToAction("Index", new { Name = Name, Card = Card, HK = HK, Status = Status });
+            return RedirectToAction("Index", new { Name = Name, Card = Card, HK = HK, Status = Status, Name_Resource = Name_Resource, Card_Resource = Card_Resource, HK_Resource = HK_Resource, tab = tab });
         }
     }
 }
