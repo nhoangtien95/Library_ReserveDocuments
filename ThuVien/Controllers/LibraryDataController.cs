@@ -240,6 +240,47 @@ namespace ThuVien.Controllers
             ViewBag.Form2_Card = Card_Resource;
             ViewBag.Form2_HK = HK_Resource;
 
+            //Tab report
+            var allHK = db.HK.ToList();
+            int temp = 0;
+            foreach (var hk in allHK)
+            {
+                switch (temp)
+                {
+                    case 0:
+                        {
+                            ViewBag.HKI = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            break;
+                        }
+                    case 1:
+                        {
+                            ViewBag.HKII = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            break;
+                        }
+                    default:
+                        {
+                            ViewBag.HKIII = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            break;
+                        }
+                }
+                temp++;
+            }
+
+            var Course = db.GiangVien.Select(x => x.Khoa).ToList().Distinct();
+            var ListCourse = new List<int>();
+            var CourseCount = 0;
+            foreach (var c in Course)
+            {
+                var count = db.GiangVien.Where(x => x.Khoa == c).Distinct().Count();
+                ListCourse.Add(count);
+                CourseCount++;
+            }
+
+            ViewBag.CourseCount = CourseCount;
+            ViewBag.Course = Course;
+            ViewBag.ListCourse = ListCourse;
+            ViewBag.AllRequest = db.GiangVien.Count();
+
             return View();
         }
 
