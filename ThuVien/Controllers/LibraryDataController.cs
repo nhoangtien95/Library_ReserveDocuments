@@ -249,22 +249,52 @@ namespace ThuVien.Controllers
                 {
                     case 0:
                         {
-                            ViewBag.HKI = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            ViewBag.HKI = db.MonHoc.Where(x => x.HK == hk.Hocky).Select(x => x.CourseID).ToList().Distinct();
                             break;
                         }
                     case 1:
                         {
-                            ViewBag.HKII = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            ViewBag.HKII = db.MonHoc.Where(x => x.HK == hk.Hocky).Select(x => x.CourseID).ToList().Distinct();
                             break;
                         }
                     default:
                         {
-                            ViewBag.HKIII = db.MonHoc.Where(x => x.HK == hk.Hocky).ToList().Distinct();
+                            ViewBag.HKIII = db.MonHoc.Where(x => x.HK == hk.Hocky).Select(x => x.CourseID).ToList().Distinct();
                             break;
                         }
                 }
                 temp++;
             }
+
+            var tempGV00 = db.GiangVien.Where(x => x.Status == 0).ToList();
+            var ListGVCourse00 = new List<MonHoc>();
+            
+            foreach( var tempgv in tempGV00)
+            {                
+                var count = db.MonHoc.Where(x => x.ID == tempgv.MonHocId).FirstOrDefault();
+                ListGVCourse00.Add(count);
+            }
+            ViewBag.ListGVCourse00 = ListGVCourse00.Distinct().Count();
+
+            var tempGV01 = db.GiangVien.Where(x => x.Status == 1).ToList();
+            var ListGVCourse01 = new List<MonHoc>();
+
+            foreach (var tempgv in tempGV01)
+            {
+                var count = db.MonHoc.Where(x => x.ID == tempgv.MonHocId).FirstOrDefault();
+                ListGVCourse01.Add(count);
+            }
+            ViewBag.ListGVCourse01 = ListGVCourse01.Distinct().Count();
+
+            var tempGV02 = db.GiangVien.Where(x => x.Status == 2).ToList();
+            var ListGVCourse02 = new List<MonHoc>();
+
+            foreach (var tempgv in tempGV02)
+            {
+                var count = db.MonHoc.Where(x => x.ID == tempgv.MonHocId).FirstOrDefault();
+                ListGVCourse02.Add(count);
+            }
+            ViewBag.ListGVCourse02 = ListGVCourse02.Distinct().Count();
 
             var Course = db.GiangVien.Select(x => x.Khoa).ToList().Distinct();
             var ListCourse = new List<int>();

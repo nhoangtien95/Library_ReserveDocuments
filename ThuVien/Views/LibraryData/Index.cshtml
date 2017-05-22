@@ -10,16 +10,16 @@
     var tabName = '.' + classNumber.ToString() + 'b';
     var tabModal = classNumber.ToString() + 'b';
     var tab = ViewBag.Tab;
-    var HKI = ViewBag.HKI ;
-    var HKII = ViewBag.HKII as List<ThuVien.Models.MonHoc>;
-    var HKIII = ViewBag.HKIII as IEnumerable<ThuVien.Models.MonHoc>;
-    HKIII.ToList();
-    var Course = ViewBag.Course as IEnumerable<string>;
-    Course.ToList().Distinct();
+    var HKI = ViewBag.HKI as IEnumerable<string>; HKI.ToList();
+    var HKII = ViewBag.HKII as IEnumerable<string>; HKII.ToList();
+    var HKIII = ViewBag.HKIII as IEnumerable<string>; HKIII.ToList();
+    var Course = ViewBag.Course as IEnumerable<string>; Course.ToList().Distinct();
     var ListCourse = ViewBag.ListCourse as IEnumerable<int>; ListCourse.ToList();
     var CourseCount = ViewBag.CourseCount;
     var AllRequest = ViewBag.AllRequest;
-
+    var ListGVCourse00 = ViewBag.ListGVCourse00;
+    var ListGVCourse01 = ViewBag.ListGVCourse01;
+    var ListGVCourse02 = ViewBag.ListGVCourse02;
     List<SelectListItem>
 listItems = new List<SelectListItem>
 ();
@@ -766,14 +766,63 @@ listItems = new List<SelectListItem>
     </div>
     <div class="tab-pane fade" id="report">
         <div>
-            <br />            HK II: @HKII<br />            HK III: @HKIII.Count()<br />
+            <table style="text-align:center">
+                <tr>
+                    <th>Học Kỳ</th>
+                    <th>Tổng Mã Môn</th>
+                </tr>
+                <tr>
+                    <td>HK I</td>
+                    <td>@HKI.Count()</td>
+                </tr>
+                <tr>
+                    <td>HK II</td>
+                    <td>@HKII.Count()</td>
+                </tr>
+                <tr>
+                    <td>HK III</td>
+                    <td>@HKIII.Count()</td>
+                </tr>
+            </table>
+             
             <hr />
-            @for(int i = 0; i < Course.Count(); i++)
-            {
-                @Course.Skip(i).FirstOrDefault(); @ListCourse.Skip(i).FirstOrDefault(); <br />
-            }
+
             <br /><hr />
-            Tất cả request nhận được: @AllRequest
+            Tất cả request nhận được: @AllRequest <br />
+            <table style="text-align:center">
+                <tr>
+                    <th>Tên Khoa</th>
+                    <th>Số Lượng Request</th>
+                </tr>
+
+                @for (int i = 0; i < Course.Count(); i++)
+                {
+                    <tr>
+                        <td>@Course.Skip(i).FirstOrDefault()</td>
+                        <td>@ListCourse.Skip(i).FirstOrDefault()</td>
+                    </tr>
+                }
+
+            </table>
+            <br /><hr />
+            <table style="text-align:center">
+                <tr>
+                    <th>Tình Trạng</th>
+                    <th>Số Request</th>
+                </tr>
+                <tr>
+                    <td>Chưa xử lý</td>
+                    <td>@ListGVCourse00</td>
+                </tr>
+                <tr>
+                    <td>Đang xử lý</td>
+                    <td>@ListGVCourse01</td>
+                </tr>
+                <tr>
+                    <td>Đã xử lý</td>
+                    <td>@ListGVCourse02</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
